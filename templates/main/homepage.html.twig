@@ -5,4 +5,12 @@
 {% endblock %}
 
 {% block body %}
+    <div class="flex max-sm:flex-col max-sm:m-0 max-w-screen-xl xl:mx-auto mx-8 my-9 h-[450px]">
+        <div class="max-sm:order-2 max-sm:w-full max-sm:py-8 bg-primary-color grow px-8 py-16 w-2/5">
+            <h1 class="text-3xl uppercase text-white">Unser Tipp des Tages</h1>
+            <p class="text-text-color">Bananen gehen in die Maill und bestellen Kaffee!</p>
+            <button class="p-2 bg-white rounded my-4 uppercase text-text-color">Hier klicken</button>
+        </div>
+        <img class="max-sm:order-1 max-sm:w-full w-3/5 object-cover object-center" height="450" src="{{ asset('images/websiteplanet-dummy-900X600.webp') }}">
+    </div>
 {% endblock %}
