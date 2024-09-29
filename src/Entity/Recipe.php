@@ -48,4 +48,14 @@ class Recipe
 
         return $this;
     }
+
+    public function getImageUrl(int $width) : string 
+    {
+        return sprintf(
+            'https://picsum.photos/id/%d/%d/%d',
+            ($this->getId() + 50) % 1000, // number between 0 and 1000, based on the id
+            $width,
+            $width/1.5
+        );
+    }
 }
