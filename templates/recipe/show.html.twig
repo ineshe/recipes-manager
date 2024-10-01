@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Recipes
+{% endblock %}
+
+{% block body %}
+    <section class="max-w-screen-xl xl:mx-auto mx-8 my-10">
+        <h2 class="text-3xl uppercase text-secondary-color mb-6">{{ recipe.title }}</h2>
+        <img class="object-cover object-center w-full h-[500px]" src="{{ recipe.getImageUrl(1280) }}">
+        <div class="flex">
+            <div class="bg-primary-color w-2/6 p-8">
+                <h3 class="uppercase text-white font-semibold text-2xl mb-4">Ingredients</h3>
+                <div class="grid grid-cols-[2.5rem_1fr_2.5rem] grid-rows-[2.5rem] items-center text-secondary-color font-semibold pb-4">
+                    <button class="bg-white border-2 border-secondary-color h-full">-</button>
+                    <span class="bg-white flex items-center justify-center border-y-2 border-secondary-color h-full">2&nbsp;Portionen</span>
+                    <button class="bg-white border-2 border-secondary-color h-full">+</button>                
+                </div>
+                <table class="text-secondary-color font-semibold w-full">
+                    <tr class="border-b-2 border-secondary-color w-full">
+                        <td class="text-right align-top max-w-32 py-2 pr-4">100g</td><td class="py-2">Butterschinken Sahne</td>
+                    </tr>
+                    <tr class="border-b-2 border-secondary-color w-full">
+                        <td class="text-right align-top max-w-32 py-2 pr-4">1&nbsp;Stückchen oder 1&nbsp;Stück</td><td class="py-2">Ingwer Wurzelgemüse aus der Dose</td>
+                    </tr>
+                    <tr class="border-b-2 border-secondary-color w-full">
+                        <td class="text-right align-top max-w-32 py-2 pr-4">1&nbsp;Stückchen oder 1&nbsp;Stück</td><td class="py-2">Ingwerwurzel</td>
+                    </tr>                    
+                    <tr class="border-b-2 border-secondary-color w-full">
+                        <td class="text-right align-top max-w-32 py-2 pr-4">1</td><td class="py-2">Karotte</td>
+                    </tr>                                        
+                </table>
+            </div>
+            <div class="bg-white w-4/6 p-8">
+                <h3 class="uppercase text-secondary-color font-semibold text-2xl mb-4">Method</h3>
+                <div>
+                    <ol class="list-decimal pl-4 space-y-4">
+                        <li>Die Pilze trocken vom Schmutz befreien, das geht am besten mit einem weichen Pinsel. Pilze in Scheiben schneiden. Schalotte und Knoblauch schälen und in sehr feine Würfel schneiden. Petersilie waschen, dann gründlich trockenschleudern und fein hacken.</li>
+
+                        <li>Das Öl in einer Pfanne erhitzen, darin die Schalotten– und Knoblauchwürfel glasig anschwitzen. Die Pilze dazugeben und andünsten, dann mit Marsala ablöschen. Mit Salz und Pfeffer sehr gut würzen. Die Flüssigkeit bis auf 2 EL einkochen lassen, dabei ab und zu umrühren. Die Hälfte der Pilze aus der Pfanne nehmen und fein pürieren, die restlichen Pilze und die Petersilie (bis auf 1 EL) untermischen.</li>
+
+                        <li>Den Backofen auf 250 °C Ober-/Unterhitze vorheizen.</li>
+                        <li>Die Brotscheiben auf ein Backblech legen und goldbraun rösten. Mit Butter und der Pilzmasse bestreichen. Mit der restlichen Petersilie bestreuen und sofort servieren.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+{% endblock %}
