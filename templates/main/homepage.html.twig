@@ -20,10 +20,10 @@
         <h2 class="max-sm:text-center text-3xl uppercase text-secondary-color mb-6">Rezepte</h2>
         <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 ">
             {% for recipe in recipes %}
-                <div class="bg-white shadow max-w-[600px] mx-auto">
+                <a class="bg-white shadow max-w-[600px] mx-auto" href="{{ path('app_recipe_show', { id: recipe.id }) }}">
                     <img src="{{ recipe.getImageUrl(600) }}">
                     <p class="p-4 uppercase text-secondary-color font-semibold">{{ recipe.title }}</p>
-                </div>
+                </a>
             {% endfor %}       
         </div>
     </section>
