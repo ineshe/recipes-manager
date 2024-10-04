@@ -17,7 +17,7 @@
                     <button class="bg-white border-2 border-secondary-color h-full">+</button>                
                 </div>
                 <table class="text-secondary-color font-semibold w-full">
-                    <tr class="border-b-2 border-secondary-color w-full">
+{#                     <tr class="border-b-2 border-secondary-color w-full">
                         <td class="text-right align-top max-w-32 py-2 pr-4">100g</td><td class="py-2">Butterschinken Sahne</td>
                     </tr>
                     <tr class="border-b-2 border-secondary-color w-full">
@@ -28,7 +28,14 @@
                     </tr>                    
                     <tr class="border-b-2 border-secondary-color w-full">
                         <td class="text-right align-top max-w-32 py-2 pr-4">1</td><td class="py-2">Karotte</td>
-                    </tr>                                        
+                    </tr>  #}
+                    {# {{ dump(recipe) }} #}
+                    {% for ingredient in recipe.ingredients %}
+                        
+                        <tr class="border-b-2 border-secondary-color w-full">
+                            <td class="text-right align-top max-w-32 py-2 pr-4">100g</td><td class="py-2">{{ ingredient.name }}</td>
+                        </tr>
+                    {% endfor %}                                  
                 </table>
             </div>
             <div class="bg-white w-4/6 p-8">
