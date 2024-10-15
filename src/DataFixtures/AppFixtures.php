@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Factory\IngredientFactory;
 use App\Factory\RecipeFactory;
+use App\Factory\RecipeIngredientFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -11,10 +12,19 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        $recipes = RecipeFactory::createMany(7);
 
-        RecipeFactory::createMany(7, ['ingredients' => IngredientFactory::new()->many(5, 12)]);
+        IngredientFactory::createMany(20);
+
+        foreach ($recipes as $recipe) {
+            $ingredients = IngredientFactory::randomRange(4, 10);
+            foreach ($ingredients as $ingredient) {
+                RecipeIngredientFactory::createOne([
+                    'ingredient' => $ingredient,
+                    'recipe' => $recipe,
+                ]);
+            }
+        };
 
         $manager->flush();
     }

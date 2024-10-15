@@ -33,7 +33,7 @@ final class RecipeFactory extends PersistentProxyObjectFactory
     {
         return [
             'title' => self::faker()->words(3, true),
-            'method' => self::faker()->text(),
+            'method' => self::faker()->paragraphs(4, true),
         ];
     }
 

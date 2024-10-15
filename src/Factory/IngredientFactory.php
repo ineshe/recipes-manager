@@ -32,7 +32,7 @@ final class IngredientFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'name' => self::faker()->randomElement(
+            'name' => self::faker()->unique()->randomElement(
                 [
                     'Ingwer', 
                     'Frühlingszwiebel', 
@@ -60,7 +60,7 @@ final class IngredientFactory extends PersistentProxyObjectFactory
                     'Thunfisch',
                     'Miso Paste',
                     'Basmatireis',
-                    'Kokosmilch'
+                    'Kokosmilch',
                 ]
             ),
         ];
