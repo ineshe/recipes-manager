@@ -29,12 +29,10 @@
                 <h3 class="uppercase text-secondary-color font-semibold text-2xl mb-4">Method</h3>
                 <div>
                     <ol class="list-decimal pl-4 space-y-4">
-                        <li>Die Pilze trocken vom Schmutz befreien, das geht am besten mit einem weichen Pinsel. Pilze in Scheiben schneiden. Schalotte und Knoblauch schälen und in sehr feine Würfel schneiden. Petersilie waschen, dann gründlich trockenschleudern und fein hacken.</li>
-
-                        <li>Das Öl in einer Pfanne erhitzen, darin die Schalotten– und Knoblauchwürfel glasig anschwitzen. Die Pilze dazugeben und andünsten, dann mit Marsala ablöschen. Mit Salz und Pfeffer sehr gut würzen. Die Flüssigkeit bis auf 2 EL einkochen lassen, dabei ab und zu umrühren. Die Hälfte der Pilze aus der Pfanne nehmen und fein pürieren, die restlichen Pilze und die Petersilie (bis auf 1 EL) untermischen.</li>
-
-                        <li>Den Backofen auf 250 °C Ober-/Unterhitze vorheizen.</li>
-                        <li>Die Brotscheiben auf ein Backblech legen und goldbraun rösten. Mit Butter und der Pilzmasse bestreichen. Mit der restlichen Petersilie bestreuen und sofort servieren.</li>
+                        {% set paragraphs = recipe.method|nl_split %}
+                        {% for paragraph in paragraphs %}
+                            <li>{{ paragraph }}</li>
+                        {% endfor %}
                     </ol>
                 </div>
             </div>
