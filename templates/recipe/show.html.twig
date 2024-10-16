@@ -11,10 +11,10 @@
         <div class="flex">
             <div class="bg-primary-color w-2/6 p-8">
                 <h3 class="uppercase text-white font-semibold text-2xl mb-4">Ingredients</h3>
-                <div class="grid grid-cols-[2.5rem_1fr_2.5rem] grid-rows-[2.5rem] items-center text-secondary-color font-semibold pb-4">
-                    <button class="bg-white border-2 border-secondary-color h-full">-</button>
-                    <span class="bg-white flex items-center justify-center border-y-2 border-secondary-color h-full">2&nbsp;Portionen</span>
-                    <button class="bg-white border-2 border-secondary-color h-full">+</button>                
+                <div class="grid grid-cols-[2.5rem_1fr_2.5rem] grid-rows-[2.5rem] items-center text-secondary-color font-semibold pb-4" data-controller="ingredient">
+                    <button class="bg-white border-2 border-secondary-color h-full" data-action="click->ingredient#decrease">-</button>
+                    <p class="bg-white flex items-center justify-center border-y-2 border-secondary-color h-full"><span data-ingredient-target="servings">2</span>&nbsp;Portionen</p>
+                    <button class="bg-white border-2 border-secondary-color h-full" data-action="click->ingredient#increase">+</button>                
                 </div>
                 <table class="text-secondary-color font-semibold w-full">
                     {% for recipeIngredient in recipe.recipeIngredients %}
