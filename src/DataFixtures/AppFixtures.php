@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\CategoryFactory;
 use App\Factory\IngredientFactory;
 use App\Factory\RecipeFactory;
 use App\Factory\RecipeIngredientFactory;
@@ -15,6 +16,22 @@ class AppFixtures extends Fixture
         $recipes = RecipeFactory::createMany(7);
 
         IngredientFactory::createMany(20);
+
+        CategoryFactory::createSequence(
+            [
+                [
+                    'title' => 'Hauptgerichte',
+                    'recipes' => RecipeFactory::randomSet(5),
+                ], [
+                    'title' => 'Gebäck',
+                    'recipes' => RecipeFactory::randomSet(3),
+
+                ], [
+                    'title' => 'Getränke',
+                    'recipes' => RecipeFactory::randomSet(2),
+                ],
+            ]
+        );
 
         foreach ($recipes as $recipe) {
             $ingredients = IngredientFactory::randomRange(4, 10);
