@@ -9,25 +9,14 @@
             <h1 class="text-4xl text-center"><a href="{{ path('app_homepage') }}">Recines</a></h1>
             <nav>
                 <ul class="flex justify-center uppercase font-semibold">
-                    <li class="flex items-center">
-                        <a 
-                            href="{{ path('app_category_main_dishes') }}" 
-                            class="p-2 hover:text-secondary-color 
-                                {% if activeRoute == 'app_category_main_dishes' %}
-                                    text-secondary-color underline decoration-2 underline-offset-4
-                                {% endif %}"
-                        > 
-                            Hauptgerichte
-                        </a>
-                    </li>
-                    <li class="flex items-center">
-                        <span>|</span>
-                        <a href="#" class="p-2 hover:text-secondary-color">Gebäck</a>
-                    </li>
-                    <li class="flex items-center">
-                        <span>|</span>
-                        <a href="#" class="p-2 hover:text-secondary-color">Getränke</a>
-                    </li>
+                    {% for category in categories %}
+                        <li class="flex items-center">
+                            {% if not loop.first %}
+                                <span>|</span>    
+                            {% endif %}
+                            <a href="{{ path('app_category_show', { title: category.title }) }}" class="p-2 hover:text-secondary-color">{{ category.title }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </nav>
         

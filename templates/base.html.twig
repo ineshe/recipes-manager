@@ -14,7 +14,9 @@
     </head>
     <body>
         {% block header %}
-            {{ include('_header.html.twig') }}
+            {{ render(controller(
+                'App\\Controller\\CategoryController::all'
+            )) }}
         {% endblock %}
         {% block body %}{% endblock %}
     </body>

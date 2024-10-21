@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Recipes
+{% endblock %}
+
+{% block body %}
+    <section class="max-w-screen-xl xl:mx-auto mx-8 my-10">
+        <h2 class="max-sm:text-center text-3xl uppercase text-secondary-color mb-6">Rezepte</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 ">
+            {% for recipe in category.recipes %}
+                <a class="bg-white shadow max-w-[600px] mx-auto" href="{{ path('app_recipe_show', { id: recipe.id }) }}">
+                    <div class="overflow-hidden">
+                        <img class="transition-transform duration-500 ease-out hover:scale-110" src="{{ recipe.getImageUrl(600) }}">
+                    </div>
+                    <p class="p-4 uppercase text-secondary-color font-semibold">{{ recipe.title }}</p>
+                </a>
+            {% endfor %}       
+        </div>
+    </section>
+{% endblock %}
