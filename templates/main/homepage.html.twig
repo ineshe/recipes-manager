@@ -7,14 +7,16 @@
 {% block body %}
 
     <section class="flex max-sm:flex-col max-w-screen-xl xl:mx-auto mx-8 my-10 sm:h-[450px] shadow">
+        {% set recipeDemo = random(recipes) %}
         <div class="max-sm:order-2 max-sm:w-full max-sm:py-8 bg-primary-color grow px-8 py-16 w-2/6">
             <h2 class="text-3xl uppercase text-white mb-2">Unser Tipp des Tages</h2>
+            <p class="text-text-color">{{ recipeDemo.title }}</p>
             <button class="py-2.5 px-3 mt-6 text-text-color font-semibold uppercase 
                 border-2 border-text-color rounded-sm bg-transparent hover:text-white hover:bg-text-color transition duration-300"
             >Hier klicken</button>
         </div>
         <img class="max-sm:order-1 max-sm:w-full w-4/6 object-cover object-center h-[450px]" 
-            src="{{ asset('images/websiteplanet-dummy-900X600.webp') }}">
+            src="{{ recipeDemo.getImageUrl(900) }}"/>
     </section>
 
     <section class="max-w-screen-xl xl:mx-auto mx-8 my-10">
