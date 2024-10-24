@@ -14,7 +14,10 @@
     </head>
     <body>
         {% block header %}
-            {{ include('_header.html.twig') }}
+            {{ render(controller(
+                'App\\Controller\\CategoryController::all',
+                { 'currentCategory': app.request.attributes.get('title') }
+            )) }}
         {% endblock %}
         {% block body %}{% endblock %}
     </body>

@@ -2,13 +2,13 @@
 
 namespace App\Factory;
 
-use App\Entity\Recipe;
+use App\Entity\Category;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Recipe>
+ * @extends PersistentProxyObjectFactory<Category>
  */
-final class RecipeFactory extends PersistentProxyObjectFactory
+final class CategoryFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,7 +21,7 @@ final class RecipeFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Recipe::class;
+        return Category::class;
     }
 
     /**
@@ -32,8 +32,7 @@ final class RecipeFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'title' => self::faker()->words(3, true),
-            'method' => self::faker()->paragraphs(4, true),
+            'title' => self::faker()->words(1, true),
         ];
     }
 
@@ -43,7 +42,7 @@ final class RecipeFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Recipe $recipe): void {})
+            // ->afterInstantiate(function(Category $category): void {})
         ;
     }
 }

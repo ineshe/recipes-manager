@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\RecipeRepository;
+use App\Repository\IngredientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RecipeRepository::class)]
-class Recipe
+#[ORM\Entity(repositoryClass: IngredientRepository::class)]
+class Ingredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,15 +16,12 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $method = null;
+    private ?string $name = null;
 
     /**
      * @var Collection<int, RecipeIngredient>
      */
-    #[ORM\OneToMany(targetEntity: RecipeIngredient::class, mappedBy: 'recipe', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: RecipeIngredient::class, mappedBy: 'ingredient', orphanRemoval: true)]
     private Collection $recipeIngredients;
 
     public function __construct()
@@ -38,38 +34,16 @@ class Recipe
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): static
+    public function setName(string $name): static
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
-    }
-
-    public function getMethod(): ?string
-    {
-        return $this->method;
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->method = $method;
-
-        return $this;
-    }
-
-    public function getImageUrl(int $width) : string 
-    {
-        return sprintf(
-            'https://picsum.photos/id/%d/%d/%d',
-            ($this->getId() + 50) % 1000, // number between 0 and 1000, based on the id
-            $width,
-            $width/1.5
-        );
     }
 
     /**
@@ -84,7 +58,7 @@ class Recipe
     {
         if (!$this->recipeIngredients->contains($recipeIngredient)) {
             $this->recipeIngredients->add($recipeIngredient);
-            $recipeIngredient->setRecipe($this);
+            $recipeIngredient->setIngredient($this);
         }
 
         return $this;
@@ -94,8 +68,8 @@ class Recipe
     {
         if ($this->recipeIngredients->removeElement($recipeIngredient)) {
             // set the owning side to null (unless already changed)
-            if ($recipeIngredient->getRecipe() === $this) {
-                $recipeIngredient->setRecipe(null);
+            if ($recipeIngredient->getIngredient() === $this) {
+                $recipeIngredient->setIngredient(null);
             }
         }
 

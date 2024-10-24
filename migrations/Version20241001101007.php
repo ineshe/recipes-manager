@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20240920144559 extends AbstractMigration
+final class Version20241001101007 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -17,10 +17,9 @@ final class Version20240920144559 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql('
-            CREATE TABLE recipe (
+            CREATE TABLE ingredient (
                 id INT AUTO_INCREMENT NOT NULL, 
-                title VARCHAR(255) NOT NULL,
-                method LONGTEXT NOT NULL,
+                name VARCHAR(255) NOT NULL, 
                 PRIMARY KEY(id)
             ) 
             DEFAULT CHARACTER SET utf8mb4 
@@ -31,6 +30,6 @@ final class Version20240920144559 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->addSql('DROP TABLE recipe');
+        $this->addSql('DROP TABLE ingredient');
     }
 }
