@@ -15,7 +15,8 @@
     <body>
         {% block header %}
             {{ render(controller(
-                'App\\Controller\\CategoryController::all'
+                'App\\Controller\\CategoryController::all',
+                { 'currentCategory': app.request.attributes.get('title') }
             )) }}
         {% endblock %}
         {% block body %}{% endblock %}

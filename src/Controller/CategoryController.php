@@ -19,12 +19,13 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    public function all(EntityManagerInterface $entityManager) : Response {
+    public function all(EntityManagerInterface $entityManager, ?string $currentCategory) : Response {
         $categoryRepository = $entityManager->getRepository(Category::class);
         $categories = $categoryRepository->findAll();
 
         return $this->render('_header.html.twig', [
             'categories' => $categories,
+            'currentCategory' => $currentCategory,
         ]);
     }
 }
