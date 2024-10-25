@@ -30,5 +30,17 @@ class RecipeController extends AbstractController
             'servings' => $servings,
         ]);
     }
+
+    #[Route('/search', name: 'app_recipe_search')]
+    public function search(RecipeRepository $recipeRepository, Request $request) : Response
+    {
+        $searchTerm = $request->query->get('search');
+
+        $recipes = $recipeRepository->findByTitleField($searchTerm);
+
+        return $this->render('recipe/search.html.twig', [
+            'recipes' => $recipes,
+        ]);
+    }
 }
 
