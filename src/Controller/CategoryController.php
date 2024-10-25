@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/{title}', name: 'app_category_show')]
+    #[Route('/category/{title}', name: 'app_category_show')]
     public function show(#[MapEntity(mapping: ['title' => 'title'])] Category $category) : Response
     {
         return $this->render('category/category.html.twig', [
