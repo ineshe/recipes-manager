@@ -1,34 +1,48 @@
-<div class="grid grid-cols-[auto,1fr,auto] gap-4 items-center bg-primary-color p-4 text-white">
-{#         <a class="text-main-color" href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-10">
-            <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
-        </svg>      
-    </a> #}
+<div data-controller="search">    
+    <div class="grid grid-cols-[auto,1fr,auto] gap-4 items-center bg-primary-color p-4 text-white">
+    {#         <a class="text-main-color" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-10">
+                <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+            </svg>      
+        </a> #}
 
-    <h1 class="text-4xl text-center"><a href="{{ path('app_homepage') }}">Recines</a></h1>
-    <nav>
-        <ul class="flex justify-center uppercase font-semibold">
-            {% for category in categories %}
-                <li class="flex items-center">
-                    {% if not loop.first %}
-                        <span>|</span>    
-                    {% endif %}
-                    <a href="{{ path('app_category_show', { title: category.title }) }}" 
-                        class="p-2 hover:text-secondary-color {% if currentCategory is same as category.title %} text-secondary-color {% endif %}">{{ category.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </nav>
-    
-    <button>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
-            <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
-        </svg>
-    </button>
-</div>
-<div class="bg-secondary-color p-4 text-center">
-    <form action="{{ path('app_recipe_search') }}" method="get">
-        <input type="text" name="search" placeholder="Was darf's sein?" />
-        <button type="submit">Suchen</button>
-    <form>
+        <h1 class="text-4xl text-center"><a href="{{ path('app_homepage') }}">Recines</a></h1>
+        <nav>
+            <ul class="flex justify-center uppercase font-semibold">
+                {% for category in categories %}
+                    <li class="flex items-center">
+                        {% if not loop.first %}
+                            <span>|</span>    
+                        {% endif %}
+                        <a href="{{ path('app_category_show', { title: category.title }) }}" 
+                            class="p-2 hover:text-secondary-color {% if currentCategory is same as category.title %} text-secondary-color {% endif %}">{{ category.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        
+        <button data-action="search#toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
+                <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </div>
+    <div data-search-target="searchbar" class="searchbar h-0 transition-all duration-700 ease-in-out overflow-hidden bg-secondary-color text-center text-white">
+        <div class="inner-content p-4 flex justify-center">
+            <form action="{{ path('app_recipe_search') }}" method="get" class="grid grid-cols-[auto_1fr_auto] grid-rows-[1fr_auto] gap-x-1 w-2/3" autocomplete="off">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <input type="text" name="search" placeholder="Was darf's sein?" class="bg-transparent focus:outline-none" autocomplete="off" />
+                <button type="button" data-action="search#toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                        <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                    </svg>
+                </button>
+                <span class="col-span-3 h-[4px] bg-white rounded-full"></span>
+            <form>        
+        </div>
+    </div>
 </div>
