@@ -23,7 +23,7 @@ class CategoryController extends AbstractController
         $categoryRepository = $entityManager->getRepository(Category::class);
         $categories = $categoryRepository->findAll();
 
-        return $this->render('_header.html.twig', [
+        return $this->render('/partials/_header.html.twig', [
             'categories' => $categories,
             'currentCategory' => $currentCategory,
         ]);
