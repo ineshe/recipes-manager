@@ -5,6 +5,17 @@
 {% endblock %}
 
 {% block body %}
+
+    {% set recipeDemo = random(category.recipes) %}
+
+    <section class="max-w-screen-xl xl:mx-auto mx-8 my-10 h-[350px] shadow relative bg-cover bg-center" style="background-image: url('{{ recipeDemo.getImageUrl(1290) }}')">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <h2 class="text-white text-3xl font-bold text-center drop-shadow-lg">
+                {{ category.title }}
+            </h2>
+        </div>
+    </section>
+
     <section class="max-w-screen-xl xl:mx-auto mx-8 my-10">
         {{ include('partials/_recipe-list.html.twig', { 'recipes': category.recipes }) }}
     </section>
