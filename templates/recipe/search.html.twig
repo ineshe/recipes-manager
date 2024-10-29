@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    {% for recipe in recipes %}
-        <p>{{ recipe.title }}</p>
-    {% endfor %}
+
+    <section class="max-w-screen-xl xl:mx-auto mx-8 my-10">
+        <h2 class="max-sm:text-center text-3xl text-secondary-color mb-6">{{ '{0} Keine Ergebnisse|{1} Ein Suchergebnis|]1,Inf[ %count% Suchergebnisse'|trans({'%count%': recipes|length}) }}</h2>
+        {{ include('partials/_recipe-list.html.twig') }}
+    </section>
+
 {% endblock %}

@@ -27,20 +27,9 @@
             src="{{ recipeDemo.getImageUrl(900) }}"/>
     </section>
 
-    <section class="max-w-screen-xl xl:mx-auto mx-8 my-10">
+    <section class="max-w-screen-xl xl:mx-auto mx-8 mt-10 mb-14">
         <h2 class="max-sm:text-center text-3xl uppercase text-secondary-color mb-6">Rezepte</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 ">
-            {% for recipe in recipes %}
-                <a class="bg-white shadow max-w-[600px] mx-auto" href="{{ path('app_recipe_show', { id: recipe.id }) }}">
-                    <div class="overflow-hidden">
-                        {# <img class="transition-transform duration-500 ease-out hover:scale-110" src="{{ recipe.getImageUrl(300) }}"> #}
-                        {# <img class="transition-transform duration-500 ease-out hover:scale-110" src="{{ asset('images/websiteplanet.webp') | imagine_filter('card') }}" /> #}
-                        <img class="transition-transform duration-500 ease-out hover:scale-110" src="{{ '/images/websiteplanet-dummy-900X600.webp' | imagine_filter('card') }}" />
-                    </div>
-                    <p class="p-4 uppercase text-secondary-color font-semibold">{{ recipe.title }}</p>
-                </a>
-            {% endfor %}       
-        </div>
+        {{ include('partials/_recipe-list.html.twig') }}
     </section>
 
 {% endblock %}
