@@ -5,3 +5,20 @@
 body {
     background-color: #efecd8;
 }
+
+.nav-open #main-nav {
+    left: 0;
+}
+
+#main-nav {
+    left: -90%;
+}
+
+.nav-open #overlay {
+    display: block;
+}
+
+#overlay {
+    display: none;
+}
+

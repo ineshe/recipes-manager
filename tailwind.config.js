@@ -12,8 +12,8 @@ module.exports = {
         // 'text-color': '#566150'
         // 'text-color': '#213B2C'
         'secondary-color': '#264c37',
-        'text-color': '#264c37'
-        
+        'text-color': '#264c37',
+        'background-color': '#efecd8',
       },
     },
   },
