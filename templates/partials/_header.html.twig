@@ -1,5 +1,5 @@
 <div data-controller="navigation search">
-    <div class="grid grid-cols-[auto,1fr,auto] gap-4 items-center bg-primary-color p-4 text-white">
+    <div class="grid grid-cols-[auto,1fr,auto] gap-4 items-center bg-primary-color py-4 px-8 text-white">
         <button class="sm:hidden" data-action="navigation#toggle">
             {{ ux_icon('heroicons:bars-3', {class: 'w-8 h-8'}) }}
         </button>
@@ -33,8 +33,8 @@
         </button>
     </div>
     <div data-search-target="searchbar" class="searchbar h-0 transition-all duration-700 ease-in-out overflow-hidden bg-secondary-color text-center text-white">
-        <div class="inner-content p-4 flex justify-center">
-            <form action="{{ path('app_recipe_search') }}" method="get" class="grid grid-cols-[auto_1fr_auto] grid-rows-[1fr_auto] gap-x-1 w-2/3" autocomplete="off">
+        <div class="inner-content py-4 px-8 flex justify-center">
+            <form action="{{ path('app_recipe_search') }}" method="get" class="grid grid-cols-[auto_1fr_auto] grid-rows-[1fr_auto] gap-x-1 w-full sm:w-2/3" autocomplete="off">
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                         <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
