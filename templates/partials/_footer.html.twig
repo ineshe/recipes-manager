@@ -14,9 +14,10 @@
         <div>
             <h3 class="text-lg font-semibold text-white mb-2">Kategorien</h3>
             <ul>
-                <li><a href="/kategorien/hauptgerichte" class="hover:text-white">Hauptgerichte</a></li>
-                <li><a href="/kategorien/getraenke" class="hover:text-white">Getränke</a></li>
-                <li><a href="/kategorien/desserts" class="hover:text-white">Desserts</a></li>
+                <li><a href="{{ path('app_category_show', { title: 'Hauptgerichte' }) }}" class="hover:text-white">Hauptgerichte</a></li>
+                <li><a href="{{ path('app_category_show', { title: 'Desserts' }) }}" class="hover:text-white">Desserts</a></li>
+                <li><a href="{{ path('app_category_show', { title: 'Getränke' }) }}" class="hover:text-white">Getränke</a></li>
+                
             </ul>
         </div>
 
