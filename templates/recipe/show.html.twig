@@ -7,10 +7,10 @@
 {% block body %}
     <section class="max-w-screen-xl xl:mx-auto mx-8 my-10">
         <h2 class="text-3xl uppercase text-secondary-color mb-6">{{ recipe.title }}</h2>
-        <img class="object-cover object-center w-full h-[500px]" src="{{ recipe.getImageUrl(1280) }}">
-        <div class="flex">
-            <div class="bg-primary-color w-2/6 p-8">
-                <h3 id="ingredients" class="uppercase text-white font-semibold text-2xl mb-4">Ingredients</h3>
+        <img class="object-cover object-center w-full h-[500px]" src="{{ recipe.imagePath | imagine_filter('homepage_stage') }}">
+        <div class="flex flex-wrap">
+            <div class="bg-primary-color basis-2/6 grow p-8">
+                <h3 id="ingredients" class="uppercase text-white font-semibold text-2xl mb-4">Zutaten</h3>
                 <div class="grid grid-cols-[2.5rem_1fr_2.5rem] grid-rows-[2.5rem] items-center text-secondary-color font-semibold pb-4">
                     <a class="bg-white border-2 border-secondary-color h-full text-center leading-9" 
                         {% if servings > 1 %}
@@ -26,13 +26,19 @@
                     {% for recipeIngredient in recipe.recipeIngredients %}
                         
                         <tr class="border-b-2 border-secondary-color w-full">
-                            <td class="text-right align-top max-w-32 py-2 pr-4">{{ recipeIngredient.amount / 4 * servings}} {{ recipeIngredient.unit }}</td><td class="py-2">{{ recipeIngredient.ingredient.name }}</td>
+                            <td class="text-right align-top max-w-32 py-2 pr-4 text-nowrap">
+                                {% if recipeIngredient.amount %}
+                                    {{ recipeIngredient.amount / 4 * servings}}
+                                {% endif %}
+                                {{ recipeIngredient.unit }}
+                            </td>
+                            <td class="py-2">{{ recipeIngredient.ingredient.name }}</td>
                         </tr>
                     {% endfor %}                                  
                 </table>
             </div>
-            <div class="bg-white w-4/6 p-8">
-                <h3 class="uppercase text-secondary-color font-semibold text-2xl mb-4">Method</h3>
+            <div class="bg-white basis-4/6 grow p-8">
+                <h3 class="uppercase text-secondary-color font-semibold text-2xl mb-4">Zubereitung</h3>
                 <div>
                     <ol class="list-decimal pl-4 space-y-4">
                         {% set paragraphs = recipe.method|nl_split %}
