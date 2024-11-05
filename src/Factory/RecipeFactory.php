@@ -32,8 +32,8 @@ final class RecipeFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'title' => self::faker()->words(3, true),
-            'method' => self::faker()->paragraphs(4, true),
+            'title' => self::faker()->words(rand(1, 3), true),
+            'method' => self::faker()->paragraphs(rand(3, 7), true),
         ];
     }
 

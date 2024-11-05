@@ -32,37 +32,7 @@ final class IngredientFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'name' => self::faker()->unique()->randomElement(
-                [
-                    'Ingwer', 
-                    'Frühlingszwiebel', 
-                    'Zitrone',
-                    'Olivenöl',
-                    'Salz',
-                    'Pfeffer',
-                    'Aprikose',
-                    'Harissa Paste',
-                    'Sesamsamen',
-                    'Koriander',
-                    'Champignon',
-                    'Basilikum',
-                    'Hähnchenbrust',
-                    'Nudeln',
-                    'Parmesan',
-                    'Ricotta',
-                    'Zwiebel',
-                    'Senf',
-                    'Milch',
-                    'Tomaten',
-                    'Tomatenmark',
-                    'Aubergine',
-                    'Süßkartoffeln',
-                    'Thunfisch',
-                    'Miso Paste',
-                    'Basmatireis',
-                    'Kokosmilch',
-                ]
-            ),
+            'name' => self::faker()->unique()->word(),
         ];
     }
 
