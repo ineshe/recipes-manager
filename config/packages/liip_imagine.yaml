@@ -10,3 +10,15 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail: { size: [570, 380], mode: outbound }
+
+        homepage_stage:
+            filters:
+                thumbnail: { size: [900, 600], mode: outbound }
+
+        recipe_detail:
+            filters:
+                thumbnail: { size: [1280, 500], mode: outbound }
+
+        category_stage:
+            filters:
+                thumbnail: { size: [1280, 250], mode: outbound }
