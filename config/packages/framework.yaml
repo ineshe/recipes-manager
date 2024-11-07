@@ -9,10 +9,6 @@ framework:
     #esi: true
     #fragments: true
 
-    assets:
-        base_path: '/assets'
-        version: 'v1.0.0'
-
 when@test:
     framework:
         test: true
