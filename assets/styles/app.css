@@ -35,3 +35,22 @@ body {
     display: none;
 }
 
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    display: none;
+}
+#cookie-banner button {
+    background-color: #264c37;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    margin: 0.5rem;
+}

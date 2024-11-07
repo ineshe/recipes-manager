@@ -20,8 +20,15 @@
             )) }}
         {% endblock %}
         {% block body %}{% endblock %}
+
+        {% block cookie_consent %}
+            {{ include('partials/_cookie-consent.html.twig') }}
+        {% endblock %}
+
         {% block footer %}
             {{ include('partials/_footer.html.twig') }}
         {% endblock %}
+
+        <script src="https://www.ines-heilmann.de/pages/main/includes/cookie-consent/cookie-consent.js"></script>
     </body>
 </html>
