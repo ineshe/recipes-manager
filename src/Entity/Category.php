@@ -27,6 +27,11 @@ class Category
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imagePath = null;
 
+    public function __toString(): string
+    {
+        return $this->getTitle();
+    }
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();

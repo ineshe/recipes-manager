@@ -24,6 +24,11 @@ class Ingredient
     #[ORM\OneToMany(targetEntity: RecipeIngredient::class, mappedBy: 'ingredient', orphanRemoval: true)]
     private Collection $recipeIngredients;
 
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
     public function __construct()
     {
         $this->recipeIngredients = new ArrayCollection();
