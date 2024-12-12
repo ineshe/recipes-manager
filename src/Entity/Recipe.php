@@ -28,14 +28,14 @@ class Recipe
     #[ORM\OneToMany(targetEntity: RecipeIngredient::class, mappedBy: 'recipe', orphanRemoval: true, cascade: ['persist'])]
     private Collection $recipeIngredients;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imagePath = null;
-
     /**
      * @var Collection<int, Category>
      */
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'recipes')]
     private Collection $categories;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -72,14 +72,17 @@ class Recipe
         return $this;
     }
 
-    public function getImageUrl(int $width) : string 
+    public function getImageUrl(): ?string 
     {
-        return sprintf(
-            'https://picsum.photos/id/%d/%d/%d',
-            ($this->getId() + 50) % 1000, // number between 0 and 1000, based on the id
-            $width,
-            $width/1.5
-        );
+        if (!$this->image) {
+            return null;
+        }
+
+        if (strpos($this->image, '/') !== false) {
+            return $this->image;
+        }
+
+        return sprintf('/images/%s', $this->image);
     }
 
     /**
@@ -112,18 +115,6 @@ class Recipe
         return $this;
     }
 
-    public function getImagePath(): ?string
-    {
-        return $this->imagePath;
-    }
-
-    public function setImagePath(?string $imagePath): static
-    {
-        $this->imagePath = $imagePath;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Category>
      */
@@ -147,6 +138,18 @@ class Recipe
         if ($this->categories->removeElement($category)) {
             $category->removeRecipe($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

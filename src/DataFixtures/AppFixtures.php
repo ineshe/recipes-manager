@@ -29,7 +29,7 @@ class AppFixtures extends Fixture
                                 Mit gehackter Petersilie bestreuen und vor dem Servieren mindestens eine Stunde im Kühlschrank durchziehen lassen.
                                 TEXT,
                 'categories' => ['Hauptgerichte'],
-                'imagePath' => '/images/kartoffelsalat-1792X1024.webp',
+                'image' => 'kartoffelsalat-1792x1024.webp',
                 'ingredients' => [
                     ['amount' => 1, 'unit' => 'kg', 'name' => 'festkochende Kartoffeln'], 
                     ['amount' => 1,  'unit' => '', 'name' => 'Salatgurke'], 
@@ -54,7 +54,7 @@ class AppFixtures extends Fixture
                                 Die Spaghetti nach Packungsanweisung in Salzwasser al dente kochen. Abgießen und mit der Bolognesesoße servieren. Nach Belieben mit geriebenem Parmesan bestreuen.
                                 TEXT,
                 'categories' => ['Hauptgerichte'],                                
-                'imagePath' => '/images/spaghetti-bolognese-1792X1024.webp',
+                'image' => 'spaghetti-bolognese-1792x1024.webp',
                 'ingredients' => [
                     ['amount' => 500, 'unit' => 'g', 'name' => 'Spaghetti'],
                     ['amount' => 400, 'unit' => 'g', 'name' => 'Hackfleisch (Rind)'],
@@ -81,7 +81,7 @@ class AppFixtures extends Fixture
                                 Den Käse reiben und gleichmäßig über den Auflauf streuen. Bei 180 °C (Ober-/Unterhitze) etwa 30 Minuten goldbraun backen. Vor dem Servieren etwas abkühlen lassen.
                                 TEXT,
                 'categories' => ['Hauptgerichte'],
-                'imagePath' => '/images/kartoffel-brokkoli-auflauf-1792X1024.webp',
+                'image' => 'kartoffel-brokkoli-auflauf-1792x1024.webp',
                 'ingredients' => [
                     ['amount' => 800, 'unit' => 'g', 'name' => 'Kartoffeln'],
                     ['amount' => 500, 'unit' => 'g', 'name' => 'Brokkoli'],
@@ -102,7 +102,7 @@ class AppFixtures extends Fixture
                                 Die Sahne und die Butter hinzufügen und das Gericht bei schwacher Hitze 20-30 Minuten köcheln lassen. Mit frischem Koriander garnieren und mit Reis oder Naan servieren.
                                 TEXT,
                 'categories' => ['Hauptgerichte'],               
-                'imagePath' => '/images/butter-chicken-1792X1024.webp',
+                'image' => 'butter-chicken-1792x1024.webp',
                 'ingredients' => [
                     ['amount' => 500, 'unit' => 'g', 'name' => 'Hähnchenbrustfilet'],
                     ['amount' => 150, 'unit' => 'g', 'name' => 'Joghurt'],
@@ -124,7 +124,7 @@ class AppFixtures extends Fixture
                                 Etwas Butter in einer Pfanne erhitzen und den Teig portionsweise hineingeben. Von beiden Seiten goldbraun backen. Nach Belieben mit Marmelade, Zucker oder Ahornsirup servieren.
                                 TEXT,
                 'categories' => ['Hauptgerichte'],
-                'imagePath' => '/images/pfannkuchen-1792X1024.webp',
+                'image' => 'pfannkuchen-1792x1024.webp',
                 'ingredients' => [
                     ['amount' => 250, 'unit' => 'g', 'name' => 'Mehl'],
                     ['amount' => 3, 'unit' => '', 'name' => 'Eier'],
@@ -140,7 +140,7 @@ class AppFixtures extends Fixture
                                 Den Zitronensaft und den Zuckersirup in die Karaffe geben, gut umrühren und mit Eiswürfeln servieren.
                                 TEXT,
                 'categories' => ['Getränke'],
-                'imagePath' => '/images/zitronenlimonade-1792X1024.webp',
+                'image' => 'zitronenlimonade-1792x1024.webp',
                 'ingredients' => [
                     ['amount' => 5, 'unit' => '', 'name' => 'Zitronen'],
                     ['amount' => 100, 'unit' => 'g', 'name' => 'Zucker'],
@@ -155,7 +155,7 @@ class AppFixtures extends Fixture
                                 Den Teig zu kleinen Kugeln formen und auf ein Backblech setzen. Bei 180 °C (Ober-/Unterhitze) 10-12 Minuten backen. Abkühlen lassen.
                                 TEXT,
                 'categories' => ['Desserts'],           
-                'imagePath' => '/images/schoko-cookies-1792X1024.webp',
+                'image' => 'schoko-cookies-1792x1024.webp',
                 'ingredients' => [
                     ['amount' => 150, 'unit' => 'g', 'name' => 'Butter'],
                     ['amount' => 100, 'unit' => 'g', 'name' => 'Zucker'],
@@ -174,7 +174,7 @@ class AppFixtures extends Fixture
                                 Den Teig in eine gefettete Form geben und bei 180 °C (Ober-/Unterhitze) 25-30 Minuten backen. Abkühlen lassen und in Stücke schneiden.
                                 TEXT,
                 'categories' => ['Desserts'],                                
-                'imagePath' => '/images/brownies-1792X1024.webp',
+                'image' => 'brownies-1792x1024.webp',
                 'ingredients' => [
                     ['amount' => 200, 'unit' => 'g', 'name' => 'Butter'],
                     ['amount' => 200, 'unit' => 'g', 'name' => 'Zartbitterschokolade'],
@@ -189,7 +189,7 @@ class AppFixtures extends Fixture
                                 Den weißen Rum, die Kokosmilch und den Ananassaft in einen Mixer geben und gut durchmixen. Mit Eiswürfeln in ein Glas gießen und mit einer Ananasscheibe garnieren.
                                 TEXT,
                 'categories' => ['Getränke'],                                
-                'imagePath' => '/images/pina-colada-1792X1024.webp',
+                'image' => 'pina-colada-1792x1024.webp',
                 'ingredients' => [
                     ['amount' => 4, 'unit' => 'cl', 'name' => 'weißer Rum'],
                     ['amount' => 100, 'unit' => 'ml', 'name' => 'Kokosmilch'],
@@ -204,13 +204,13 @@ class AppFixtures extends Fixture
             [
                 [
                     'title' => 'Hauptgerichte',
-                    'imagePath' => '/images/hauptgerichte-1792X1024.webp'
+                    'imagePath' => '/images/hauptgerichte-1792x1024.webp'
                 ], [
                     'title' => 'Desserts',
-                    'imagePath' => '/images/desserts-1792X1024.webp'
+                    'imagePath' => '/images/desserts-1792x1024.webp'
                 ], [
                     'title' => 'Getränke',
-                    'imagePath' => '/images/getraenke-1792X1024.webp'
+                    'imagePath' => '/images/getraenke-1792x1024.webp'
                 ],
             ]
         );
@@ -224,7 +224,7 @@ class AppFixtures extends Fixture
                     'title' => $recipeData['title'],
                     'method' => $recipeData['method'],
                     'categories' => CategoryFactory::repository()->matching($criteria),
-                    'imagePath' => $recipeData['imagePath'],
+                    'image' => $recipeData['image'],
                 ]
             );
 
