@@ -21,17 +21,17 @@ class RecipeCrudController extends AbstractCrudController
     {
         return [
             // IdField::new('id'),
-            TextField::new('title'),
-            TextareaField::new('method')->hideOnIndex(),
-            // TextField::new('imagePath'),
-            CollectionField::new('recipeIngredients', 'Zutaten')->useEntryCrudForm(),
-            // CollectionField::new('recipeIngredients', 'Zutaten')->setEntryType(RecipeIngredientType::class),
-            // CollectionField::new('categories', 'Kategorien')->useEntryCrudForm(),
-            AssociationField::new('categories', 'Kategorien')->setFormTypeOption('by_reference', false),
             ImageField::new('image', 'Bild')
                 ->setBasePath('images')
                 ->setUploadDir('public/images')
-                ->setUploadedFileNamePattern('[slug].[extension]'),
+                ->setUploadedFileNamePattern('[slug].[extension]')
+                ->setTextAlign('left'),
+            TextField::new('title'),
+            TextareaField::new('method')->hideOnIndex(),
+            CollectionField::new('recipeIngredients', 'Zutaten')->useEntryCrudForm()->hideOnIndex(),
+            // CollectionField::new('recipeIngredients', 'Zutaten')->setEntryType(RecipeIngredientType::class),
+            // CollectionField::new('categories', 'Kategorien')->useEntryCrudForm(),
+            AssociationField::new('categories', 'Kategorien')->setFormTypeOption('by_reference', false),
         ];
     }
 }
