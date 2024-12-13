@@ -204,13 +204,13 @@ class AppFixtures extends Fixture
             [
                 [
                     'title' => 'Hauptgerichte',
-                    'imagePath' => '/images/hauptgerichte-1792x1024.webp'
+                    'image' => 'hauptgerichte-1792x1024.webp'
                 ], [
                     'title' => 'Desserts',
-                    'imagePath' => '/images/desserts-1792x1024.webp'
+                    'image' => 'desserts-1792x1024.webp'
                 ], [
                     'title' => 'Getränke',
-                    'imagePath' => '/images/getraenke-1792x1024.webp'
+                    'image' => 'getraenke-1792x1024.webp'
                 ],
             ]
         );

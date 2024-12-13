@@ -37,6 +37,11 @@ class Recipe
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    public function __toString(): string
+    {
+        return $this->getTitle();
+    }
+
     public function __construct()
     {
         $this->recipeIngredients = new ArrayCollection();
