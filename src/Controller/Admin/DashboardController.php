@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -45,5 +46,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Rezepte', 'fa-solid fa-list-ol', Recipe::class);
         yield MenuItem::linkToCrud('Kategorien', 'fa-solid fa-table-cells-large', Category::class);
+        yield MenuItem::linkToCrud('Zutaten', 'fa-regular fa-lemon', Ingredient::class);
     }
 }
