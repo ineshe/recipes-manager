@@ -8,7 +8,7 @@
 
     {% set recipeDemo = random(category.recipes) %}
 
-    <section class="max-w-screen-xl xl:mx-auto mx-8 mt-10 mb-12 h-[250px] shadow relative bg-cover bg-center" style="background-image: url('{{ category.imagePath | imagine_filter('category_stage') }}')">
+    <section class="max-w-screen-xl xl:mx-auto mx-8 mt-10 mb-12 h-[250px] shadow relative bg-cover bg-center" style="background-image: url('{{ category.imageUrl | imagine_filter('category_stage') }}')">
         <div class="absolute inset-0 flex items-center justify-center">
             <h2 class="text-3xl font-bold text-center bg-white bg-opacity-90 text-secondary-color p-4 border-2 border-secondary-color rounded shadow">
                 {{ category.title }}

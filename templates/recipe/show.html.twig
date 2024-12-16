@@ -7,7 +7,7 @@
 {% block body %}
     <section class="max-w-screen-xl xl:mx-auto mx-8 my-10">
         <h2 class="text-3xl uppercase text-secondary-color mb-6">{{ recipe.title }}</h2>
-        <img class="object-cover object-center w-full h-[500px]" src="{{ recipe.imagePath | imagine_filter('homepage_stage') }}">
+        <img class="object-cover object-center w-full h-[500px]" src="{{ recipe.imageUrl | imagine_filter('homepage_stage') }}">
         <div class="flex flex-wrap">
             <div class="bg-primary-color basis-2/6 grow p-8">
                 <h3 id="ingredients" class="uppercase text-white font-semibold text-2xl mb-4">Zutaten</h3>

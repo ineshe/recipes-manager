@@ -25,7 +25,12 @@ class Category
     private Collection $recipes;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imagePath = null;
+    private ?string $image = null;
+
+    public function __toString(): string
+    {
+        return $this->getTitle();
+    }
 
     public function __construct()
     {
@@ -73,15 +78,28 @@ class Category
         return $this;
     }
 
-    public function getImagePath(): ?string
+    public function getImage(): ?string
     {
-        return $this->imagePath;
+        return $this->image;
     }
 
-    public function setImagePath(?string $imagePath): static
+    public function setImage(?string $image): static
     {
-        $this->imagePath = $imagePath;
+        $this->image = $image;
 
         return $this;
+    }
+
+    public function getImageUrl(): ?string 
+    {
+        if (!$this->image) {
+            return null;
+        }
+
+        if (strpos($this->image, '/') !== false) {
+            return $this->image;
+        }
+
+        return sprintf('/images/%s', $this->image);
     }
 }
