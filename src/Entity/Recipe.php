@@ -37,6 +37,12 @@ class Recipe
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'recipes')]
+    private Collection $recipeTags;
+
     public function __toString(): string
     {
         return $this->getTitle();
@@ -46,6 +52,7 @@ class Recipe
     {
         $this->recipeIngredients = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->recipeTags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,6 +162,30 @@ class Recipe
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getRecipeTags(): Collection
+    {
+        return $this->recipeTags;
+    }
+
+    public function addRecipeTag(Tag $recipeTag): static
+    {
+        if (!$this->recipeTags->contains($recipeTag)) {
+            $this->recipeTags->add($recipeTag);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeTag(Tag $recipeTag): static
+    {
+        $this->recipeTags->removeElement($recipeTag);
 
         return $this;
     }
