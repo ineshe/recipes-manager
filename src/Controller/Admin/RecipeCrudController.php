@@ -32,6 +32,7 @@ class RecipeCrudController extends AbstractCrudController
             // CollectionField::new('recipeIngredients', 'Zutaten')->setEntryType(RecipeIngredientType::class),
             // CollectionField::new('categories', 'Kategorien')->useEntryCrudForm(),
             AssociationField::new('categories', 'Kategorien')->setFormTypeOption('by_reference', false),
+            AssociationField::new('recipeTags', 'Tags')->setFormTypeOption('by_reference', false),
         ];
     }
 }

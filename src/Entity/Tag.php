@@ -24,6 +24,11 @@ class Tag
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'recipeTags')]
     private Collection $recipes;
 
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
