@@ -87,7 +87,7 @@ class Recipe
     public function getImageUrl(): ?string 
     {
         if (!$this->image) {
-            return null;
+            return sprintf('/images/%s', 'placeholder-1792x1024.webp');
         }
 
         if (strpos($this->image, '/') !== false) {
