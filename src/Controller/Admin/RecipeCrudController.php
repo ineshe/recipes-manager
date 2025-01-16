@@ -3,12 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Recipe;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class RecipeCrudController extends AbstractCrudController
 {
@@ -26,7 +26,8 @@ class RecipeCrudController extends AbstractCrudController
                 ->setUploadDir('public/images')
                 ->setUploadedFileNamePattern('[slug].[extension]')
                 ->setTextAlign('left'),
-            TextField::new('title'),
+            TextField::new('title', 'Titel')
+                ->setTemplatePath('admin/field/text.html.twig'),
             TextareaField::new('method')->hideOnIndex(),
             CollectionField::new('recipeIngredients', 'Zutaten')->useEntryCrudForm()->hideOnIndex(),
             // CollectionField::new('recipeIngredients', 'Zutaten')->setEntryType(RecipeIngredientType::class),

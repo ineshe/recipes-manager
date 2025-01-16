@@ -1,0 +1,5 @@
+{% if ea.crud.currentAction == 'detail' %}
+    <span title="{{ field.value }}">{{ field.formattedValue|raw|nl2br }}</span>
+{% else %}
+    <a href="{{ entity.actions.get('edit').linkUrl }}"><span title="{{ field.value }}">{{ field.formattedValue|raw }}</span></a>
+{% endif %}
