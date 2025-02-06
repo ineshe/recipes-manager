@@ -15,15 +15,12 @@ class RecipeIngredientCrudController extends AbstractCrudController
         return RecipeIngredient::class;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
         return [
-            // TextField::new('ingredient', 'Zutat'),
             AssociationField::new('ingredient'),
             NumberField::new('amount', 'Menge'),
             TextField::new('unit', 'Einheit'),
         ];
     }
-   
 }
