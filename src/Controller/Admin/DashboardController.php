@@ -53,5 +53,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Kategorien', 'fa-solid fa-table-cells-large', Category::class);
         yield MenuItem::linkToCrud('Zutaten', 'fa-regular fa-lemon', Ingredient::class);
         yield MenuItem::linkToCrud('Tags', 'fa-solid fa-tag', Tag::class);
+        yield MenuItem::linkToUrl('Homepage', 'fas fa-home', $this->generateUrl('app_homepage'));
     }
 }
