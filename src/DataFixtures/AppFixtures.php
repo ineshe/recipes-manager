@@ -7,6 +7,8 @@ use App\Factory\CategoryFactory;
 use App\Factory\IngredientFactory;
 use Doctrine\Persistence\ObjectManager;
 use App\Factory\RecipeIngredientFactory;
+use App\Factory\TagFactory;
+use App\Factory\UserFactory;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -42,6 +44,7 @@ class AppFixtures extends Fixture
                     ['amount' => null, 'unit' => '', 'name' => 'Pfeffer'], 
                     ['amount' => 1, 'unit' => 'Bund', 'name' => 'Petersilie, gehackt'],
                 ],
+                'recipeTags' => ['vegetarisch', 'vegan'],
             ], [
                 'title' => 'Spaghetti Bolognese',
                 'method' => <<<TEXT
@@ -71,6 +74,7 @@ class AppFixtures extends Fixture
                     ['amount' => null, 'unit' => '', 'name' => 'Zucker'],
                     ['amount' => null, 'unit' => '', 'name' => 'Parmesan, gerieben'],
                 ],
+                'recipeTags' => ['Fleisch'],
             ], [
                 'title' => 'Kartoffel-Brokkoli-Auflauf',
                 'method' => <<<TEXT
@@ -92,6 +96,7 @@ class AppFixtures extends Fixture
                     ['amount' => null, 'unit' => '', 'name' => 'Pfeffer'],
                     ['amount' => null, 'unit' => '', 'name' => 'Muskat'],
                 ],
+                'recipeTags' => ['vegetarisch'],
             ], [
                 'title' => 'Butter Chicken',
                 'method' => <<<TEXT
@@ -116,6 +121,7 @@ class AppFixtures extends Fixture
                     ['amount' => 50, 'unit' => 'g', 'name' => 'Butter'],
                     ['amount' => null, 'unit' => '', 'name' => 'Koriander, frisch'],
                 ],
+                'recipeTags' => ['Fleisch'],
             ], [
                 'title' => 'Pfannkuchen',
                 'method' => <<<TEXT
@@ -132,6 +138,7 @@ class AppFixtures extends Fixture
                     ['amount' => null, 'unit' => '', 'name' => 'Butter'],
                     ['amount' => null, 'unit' => '', 'name' => 'Salz'],
                 ],
+                'recipeTags' => ['vegetarisch'],
             ], [
                 'title' => 'Zitronenlimonade',
                 'method' => <<<TEXT
@@ -147,6 +154,7 @@ class AppFixtures extends Fixture
                     ['amount' => 1, 'unit' => 'l', 'name' => 'Wasser'],
                     ['amount' => null, 'unit' => '', 'name' => 'Eiswürfel'],
                 ],
+                'recipeTags' => ['vegetarisch', 'vegan'],
             ], [
                 'title' => 'Schoko-Cookies',
                 'method' => <<<TEXT
@@ -166,6 +174,7 @@ class AppFixtures extends Fixture
                     ['amount' => null, 'unit' => '', 'name' => 'Salz'],
                     ['amount' => 150, 'unit' => 'g', 'name' => 'Schokostückchen'],
                 ],
+                'recipeTags' => ['vegetarisch'],
             ], [
                 'title' => 'Brownies',
                 'method' => <<<TEXT
@@ -183,6 +192,7 @@ class AppFixtures extends Fixture
                     ['amount' => 150, 'unit' => 'g', 'name' => 'Mehl'],
                     ['amount' => null, 'unit' => '', 'name' => 'Salz'],
                 ],
+                'recipeTags' => [ 'vegetarisch'],
             ], [
                 'title' => 'Pina Colada',
                 'method' => <<<TEXT
@@ -197,6 +207,7 @@ class AppFixtures extends Fixture
                     ['amount' => null, 'unit' => '', 'name' => 'Eiswürfel'],
                     ['amount' => null, 'unit' => '', 'name' => 'Ananasscheibe, zur Deko'],
                 ],
+                'recipeTags' => ['vegetarisch', 'vegan'],
             ],
         ];
 
@@ -214,17 +225,29 @@ class AppFixtures extends Fixture
                 ],
             ]
         );
+
+        TagFactory::createSequence(
+            [
+                ['name' => 'vegetarisch'],
+                ['name' => 'vegan'],
+                ['name' => 'Fleisch'],
+            ]
+        );
         
         foreach ($recipesData as $recipeData) {
-            $criteria = Criteria::create()
+            $categoriyCriteria = Criteria::create()
                 ->where(Criteria::expr()->in('title', $recipeData['categories']));
+
+            $tagCriteria = Criteria::create()
+                ->where(Criteria::expr()->in('name', $recipeData['recipeTags']));                
 
             $recipe = RecipeFactory::createOne(
                 [
                     'title' => $recipeData['title'],
                     'method' => $recipeData['method'],
-                    'categories' => CategoryFactory::repository()->matching($criteria),
+                    'categories' => CategoryFactory::repository()->matching($categoriyCriteria),
                     'image' => $recipeData['image'],
+                    'recipeTags' => TagFactory::repository()->matching($tagCriteria)
                 ]
             );
 
@@ -240,6 +263,16 @@ class AppFixtures extends Fixture
                 ]);
             };
         }
+
+        UserFactory::createSequence([
+            [
+                'roles' => ['ROLE_ADMIN'],
+                'username' => 'user1',
+            ], [
+                'roles' => ['ROLE_USER'],
+                'username' => 'user2',
+            ]
+        ]);
 
         $manager->flush();
     }
