@@ -19,6 +19,8 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('@EasyAdmin/page/login.html.twig', [
+            'favicon_path' => 'images/favicon/favicon-admin.ico',
+            'page_title' => 'Admin Login | Recines',
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token_intention' => 'authenticate',
