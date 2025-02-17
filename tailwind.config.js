@@ -15,6 +15,9 @@ module.exports = {
         'text-color': '#264c37',
         'background-color': '#efecd8',
       },
+      gridTemplateColumns: {
+        'header': 'repeat(3, minmax(auto, 1fr))',
+      }
     },
   },
   plugins: [],
