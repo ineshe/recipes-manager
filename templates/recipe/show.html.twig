@@ -5,26 +5,30 @@
 {% endblock %}
 
 {% block body %}
-    <section class="max-w-screen-xl xl:mx-auto mx-8 my-10">
-        <h2 class="text-3xl uppercase text-secondary-color mb-6">{{ recipe.title }}</h2>
-        <img class="object-cover object-center w-full h-[500px]" src="{{ recipe.imageUrl | imagine_filter('homepage_stage') }}">
+    <section class="max-w-screen-xl xl:mx-auto sm:mx-8 sm:my-10 bg-white">
+        <div class="p-8">
+            <h2 class="text-recipes-detail-title leading-tight uppercase text-secondary-color font-semibold mb-6">{{ recipe.title }}</h2>
+            {% for tag in recipe.recipeTags %}
+                <span class="bg-secondary-color text-white py-1 px-2 rounded-sm mx-1">{{ tag.name }}</span>
+            {% endfor %}
+        </div>
+        <img class="object-cover object-center h-[450px] w-full" src="{{ recipe.imageUrl | imagine_filter('homepage_stage') }}">
         <div class="flex flex-wrap">
-            <div class="bg-primary-color basis-2/6 grow p-8">
-                <h3 id="ingredients" class="uppercase text-white font-semibold text-2xl mb-4">Zutaten</h3>
-                <div class="grid grid-cols-[2.5rem_1fr_2.5rem] grid-rows-[2.5rem] items-center text-secondary-color font-semibold pb-4">
-                    <a class="bg-white border-2 border-secondary-color h-full text-center leading-9" 
+            <div class="bg-primary-color basis-2/6 grow p-8 font-semibold">
+                <h3 id="ingredients" class="uppercase text-white text-2xl mb-4">Zutaten</h3>
+                <div class="grid grid-cols-[2.5rem_1fr_2.5rem] grid-rows-[2.5rem] items-center text-black pb-4 gap-x-2">
+                    <a class="bg-white h-full text-center leading-9" 
                         {% if servings > 1 %}
                             href="{{ path('app_recipe_show', { id: recipe.id, servings: servings - 1, _fragment: 'ingredients' }) }}"
                         {% else %}
                             href="{{ path('app_recipe_show', { id: recipe.id, servings: servings, _fragment: 'ingredients' }) }}"
                         {% endif %}>-</a>
-                    <p class="bg-white flex items-center justify-center border-y-2 border-secondary-color h-full"><span>{{ servings }}</span>&nbsp;Portionen</p>
-                    <a class="bg-white border-2 border-secondary-color h-full text-center leading-9" 
-                        href="{{ path('app_recipe_show', { id: recipe.id , servings: servings + 1, _fragment: 'ingredients' }) }}">+</a>                
+                    <p class="bg-white flex items-center justify-center h-full"><span>{{ servings }}</span>&nbsp;Portionen</p>
+                    <a class="bg-white h-full text-center leading-9" 
+                        href="{{ path('app_recipe_show', { id: recipe.id , servings: servings + 1, _fragment: 'ingredients' }) }}">+</a>
                 </div>
-                <table class="text-secondary-color font-semibold w-full">
+                <table class="text-black w-full">
                     {% for recipeIngredient in recipe.recipeIngredients %}
-                        
                         <tr class="border-b-2 border-secondary-color w-full">
                             <td class="text-right align-top max-w-32 py-2 pr-4 text-nowrap">
                                 {% if recipeIngredient.amount %}
@@ -34,7 +38,7 @@
                             </td>
                             <td class="py-2">{{ recipeIngredient.ingredient.name }}</td>
                         </tr>
-                    {% endfor %}                                  
+                    {% endfor %}
                 </table>
             </div>
             <div class="bg-white basis-4/6 grow p-8">
