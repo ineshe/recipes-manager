@@ -7,16 +7,16 @@
 {% block body %}
     <section class="max-w-screen-xl xl:mx-auto mx-4 sm:mx-8 my-10 bg-white">
         <div class="p-8">
-            <h2 class="text-recipes-detail-title leading-tight uppercase text-secondary-color font-semibold mb-6">{{ recipe.title }}</h2>
+            <h2 class="h2 text-secondary-color">{{ recipe.title }}</h2>
             {% for tag in recipe.recipeTags %}
-                <span class="bg-secondary-color text-white py-1 px-2 rounded-sm mx-1">{{ tag.name }}</span>
+                <span class="tag">{{ tag.name }}</span>
             {% endfor %}
         </div>
-        <img class="object-cover object-center h-[450px] w-full" src="{{ recipe.imageUrl | imagine_filter('homepage_stage') }}">
+        <img class="object-cover object-center img-large-height w-full" src="{{ recipe.imageUrl | imagine_filter('homepage_stage') }}">
         <div class="flex flex-wrap">
-            <div class="bg-primary-color basis-2/6 grow p-8 font-semibold">
-                <h3 id="ingredients" class="uppercase text-white text-2xl mb-4">Zutaten</h3>
-                <div class="grid grid-cols-[2.5rem_1fr_2.5rem] grid-rows-[2.5rem] items-center text-black pb-4 gap-x-2">
+            <div class="bg-primary-color basis-2/6 grow p-8">
+                <h3 id="ingredients" class="h3 text-white">Zutaten</h3>
+                <div class="grid grid-cols-[2.5rem_1fr_2.5rem] grid-rows-[2.5rem] items-center text-black pb-4 gap-x-2 font-semibold">
                     <a class="bg-white h-full text-center leading-9" 
                         {% if servings > 1 %}
                             href="{{ path('app_recipe_show', { id: recipe.id, servings: servings - 1, _fragment: 'ingredients' }) }}"
@@ -42,7 +42,7 @@
                 </table>
             </div>
             <div class="bg-white basis-4/6 grow p-8">
-                <h3 class="uppercase text-secondary-color font-semibold text-2xl mb-4">Zubereitung</h3>
+                <h3 class="h3 text-secondary-color">Zubereitung</h3>
                 <div>
                     <ol class="list-decimal pl-4 space-y-4">
                         {% set paragraphs = recipe.method|nl_split %}

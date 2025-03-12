@@ -20,7 +20,6 @@ module.exports = {
       },
       fontSize: {
         'header-logo': 'clamp(2rem, 8vw, 3rem)',
-        'recipes-detail-title': 'clamp(1.4rem, 2vw, 2rem)',
       },
     },
   },
