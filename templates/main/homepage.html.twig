@@ -14,12 +14,12 @@
 
     <section>
         <div class="flex flex-wrap-reverse shadow">
-        {% set recipeDemo = random(recipes) %}
+            {% set recipeDemo = random(recipes) %}
             <div class="max-sm:py-8 bg-primary-color px-8 py-16 w-1/3 min-w-min grow">
-            <h2 class="text-3xl uppercase text-white mb-2">Unser Tipp des Tages</h2>
-            <p class="text-text-color">{{ recipeDemo.title }}</p>
-            <a href="{{ path('app_recipe_show', { id: recipeDemo.id }) }}" 
-                class="inline-block py-2.5 px-3 mt-6 text-text-color font-semibold uppercase 
+                <h2 class="text-3xl uppercase text-white mb-2">Unser Tipp des Tages</h2>
+                <p class="text-text-color">{{ recipeDemo.title }}</p>
+                <a href="{{ path('app_recipe_show', { id: recipeDemo.id }) }}" 
+                    class="inline-block py-2.5 px-3 mt-6 text-text-color font-semibold uppercase 
                         rounded-sm bg-white transition duration-300 whitespace-nowrap"
                 >Zum Rezept</a>
             </div>
@@ -29,7 +29,7 @@
     </section>
 
     <section>
-        <h2 class="max-sm:text-center text-3xl uppercase text-secondary-color mb-6">Rezepte</h2>
+        <h2 class="h2 text-secondary-color max-sm:text-center">Rezepte</h2>
         {{ include('partials/_recipe-list.html.twig') }}
     </section>
 
