@@ -10,7 +10,7 @@
 
     <section>
         <img class="object-cover object-center h-[250px] w-full shadow" src="{{ category.imageUrl | imagine_filter('category_stage') }}">
-        <h2 class="text-3xl font-bold uppercase text-secondary-color mb-6 mt-8 border-secondary-color">
+        <h2 class="h2 text-secondary-color mt-8">
             {{ category.title }}
         </h2>
         {{ include('partials/_recipe-list.html.twig', { 'recipes': category.recipes }) }}
