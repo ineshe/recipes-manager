@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <section class="max-w-screen-xl xl:mx-auto mx-4 sm:mx-8 my-10 bg-white">
-        <div class="p-8">
+    <section>
+        <div class="p-8 bg-white">
             <h2 class="h2 text-secondary-color">{{ recipe.title }}</h2>
             {% for tag in recipe.recipeTags %}
                 <span class="tag">{{ tag.name }}</span>
@@ -53,6 +53,5 @@
                 </div>
             </div>
         </div>
-        
     </section>
 {% endblock %}

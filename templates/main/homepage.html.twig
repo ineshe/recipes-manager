@@ -12,7 +12,8 @@
 
 {% block body %}
 
-    <section class="flex max-sm:flex-col max-w-screen-xl xl:mx-auto mx-8 my-10 sm:h-[450px] shadow">
+    <section>
+        <div class="flex flex-wrap-reverse shadow">
         {% set recipeDemo = random(recipes) %}
         <div class="max-sm:order-2 max-sm:w-full max-sm:py-8 bg-primary-color grow px-8 py-16 w-2/6">
             <h2 class="text-3xl uppercase text-white mb-2">Unser Tipp des Tages</h2>
@@ -27,7 +28,7 @@
             src="{{ recipeDemo.imageUrl | imagine_filter('homepage_stage') }}"/>
     </section>
 
-    <section class="max-w-screen-xl xl:mx-auto mx-8 mt-10 mb-14">
+    <section>
         <h2 class="max-sm:text-center text-3xl uppercase text-secondary-color mb-6">Rezepte</h2>
         {{ include('partials/_recipe-list.html.twig') }}
     </section>
