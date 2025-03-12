@@ -4,7 +4,7 @@
             {{ ux_icon('heroicons:bars-3', {class: 'w-8 h-8'}) }}
         </button>
 
-        <div id="overlay" class="fixed inset-0 bg-gray-700 opacity-50 sm:hidden"></div>
+        <div id="overlay" class="fixed inset-0 bg-gray-700 opacity-50 sm:hidden" role="button" tabindex="0" data-action="navigation#toggle"></div>
 
         <h1 class="text-header-logo leading-none text-left"><a href="{{ path('app_homepage') }}">Recines</a></h1>
         
