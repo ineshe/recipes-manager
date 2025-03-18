@@ -1,11 +1,11 @@
 
-<div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 ">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
     {% for recipe in recipes %}
-        <a class="bg-white shadow max-w-[600px] mx-auto" href="{{ path('app_recipe_show', { id: recipe.id }) }}">
+        <a class="bg-white shadow max-w-[600px] mx-auto w-full" href="{{ path('app_recipe_show', { id: recipe.id }) }}">
             <div class="overflow-hidden">
                 <img class="transition-transform duration-500 ease-out hover:scale-110" src="{{ recipe.imageUrl | imagine_filter('card') }}" alt="{{ recipe.title }}" />
             </div>
-            <p class="p-4 uppercase text-secondary-color font-semibold">{{ recipe.title }}</p>
+            <p class="p-4 uppercase text-secondary-color font-semibold break-words w-full">{{ recipe.title }}</p>
         </a>
     {% endfor %}
 </div>
