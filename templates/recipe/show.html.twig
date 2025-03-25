@@ -29,14 +29,14 @@
                 </div>
                 <table class="text-black w-full">
                     {% for recipeIngredient in recipe.recipeIngredients %}
-                        <tr class="border-b-2 border-secondary-color w-full">
-                            <td class="text-right align-top max-w-32 py-2 pr-4 text-nowrap">
+                        <tr class="border-b-2 border-secondary-color w-full flex">
+                            <td class="text-right align-top py-2 pr-4 text-nowrap flex-[1_0_40%]">
                                 {% if recipeIngredient.amount %}
                                     {{ recipeIngredient.amount / 4 * servings}}
                                 {% endif %}
                                 {{ recipeIngredient.unit }}
                             </td>
-                            <td class="py-2">{{ recipeIngredient.ingredient.name }}</td>
+                            <td class="py-2 flex-[1_1_60%]">{{ recipeIngredient.ingredient.name }}</td>
                         </tr>
                     {% endfor %}
                 </table>
