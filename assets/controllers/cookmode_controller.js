@@ -15,24 +15,21 @@ export default class extends Controller {
     prevStep() {
         if(this.index > 0) {
             this.index--;
-            this.updateStepDescription();
-            this.updatePageNumber();
-            this.updateButtons();
+            this.updateView();
         }
     }
 
     nextStep() {
         if(this.index < this.stepsValue.length-1) {
             this.index++;
-            this.updateStepDescription();
-            this.updatePageNumber();
-            this.updateButtons();
+            this.updateView();
         }
     }
 
-    updateButtons() {
-        this.prevButtonTarget.classList.toggle('invisible', this.index === 0);
-        this.nextButtonTarget.classList.toggle('invisible', this.index === this.stepsValue.length - 1);
+    updateView() {
+        this.updateStepDescription();
+        this.updatePageNumber();
+        this.updateButtons();
     }
 
     updateStepDescription() {
@@ -40,6 +37,11 @@ export default class extends Controller {
     }
 
     updatePageNumber() {
-        this.pageNumberTarget.textContent = `Schritt ${this.index+1} von ${this.stepsValue.length}`;
+        this.pageNumberTarget.textContent = `Schritt ${this.index + 1} von ${this.stepsValue.length}`;
+    }
+
+    updateButtons() {
+        this.prevButtonTarget.classList.toggle('invisible', this.index === 0);
+        this.nextButtonTarget.classList.toggle('invisible', this.index === this.stepsValue.length - 1);
     }
 }
