@@ -29,7 +29,7 @@ class RecipeIngredient
 
     public function __toString(): string
     {
-        return $this->ingredient->getName();
+        return sprintf('%s %s %s', $this->getAmount(), $this->getUnit(), $this->ingredient->getName());
     }
 
     public function getId(): ?int

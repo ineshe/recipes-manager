@@ -5,7 +5,14 @@
 {% endblock %}
 
 {% block body %}
-    <section>
+    {% set paragraphs = recipe.method|nl_split %}
+    <section data-controller="cookmode" data-cookmode-steps-value="{{ paragraphs|json_encode|e('html_attr') }}">
+        <div>
+            <button data-action="cookmode#toggle" type="button">Kochmodus starten</button>
+        </div>
+        {% block cook_mode %}
+            {{ include('partials/_cook-mode.html.twig') }}
+        {% endblock %}
         <div class="p-8 bg-white">
             <h2 class="h2 text-secondary-color">{{ recipe.title }}</h2>
             {% for tag in recipe.recipeTags %}
@@ -45,7 +52,7 @@
                 <h3 class="h3 text-secondary-color">Zubereitung</h3>
                 <div>
                     <ol class="list-decimal pl-4 space-y-4">
-                        {% set paragraphs = recipe.method|nl_split %}
+                        {# {% set paragraphs = recipe.method|nl_split %} #}
                         {% for paragraph in paragraphs %}
                             <li>{{ paragraph }}</li>
                         {% endfor %}
