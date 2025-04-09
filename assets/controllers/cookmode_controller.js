@@ -7,6 +7,10 @@ export default class extends Controller {
     initialize() {
         this.index = 0;
     }
+
+    connect() {
+        this.updateView();
+    }
     
     toggle() {
         this.overlayTarget.classList.toggle('hidden');
