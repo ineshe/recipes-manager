@@ -12,7 +12,7 @@
 
 {% block body %}
 
-    <section>
+    <section class="max-w-container">
         <div class="flex flex-wrap-reverse shadow">
             {% set recipeDemo = random(recipes) %}
             <div class="max-sm:py-8 bg-primary-color px-8 py-16 w-1/3 min-w-min grow">
@@ -28,7 +28,7 @@
         </div>
     </section>
 
-    <section>
+    <section class="max-w-container">
         <h2 class="h2 text-secondary-color max-sm:text-center">Rezepte</h2>
         {{ include('partials/_recipe-list.html.twig') }}
     </section>

@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    section {
-        @apply box-content max-w-screen-xl mx-auto px-4 md:px-8 my-10;
-    }
-
-    section:last-of-type {
-        @apply mb-14;
-    }
-}
-
 @layer components {
     .h {
         @apply uppercase leading-tight;
@@ -24,6 +14,14 @@
     .h3 {
         @apply h text-xl md:text-2xl mb-4 font-semibold;
     }
+
+    .max-w-container {
+        @apply box-content max-w-screen-xl mx-auto px-4 md:px-8 my-10;
+    }
+
+    .max-w-container:last-of-type {
+        @apply mb-14;
+    }
 }
 
 @layer utilities {
@@ -33,7 +31,7 @@
 
     .img-large-height {
         @apply h-[250px] sm:h-[350px] lg:h-[450px];
-    }    
+    }
 }
 
 /* pacifico-regular - latin */
