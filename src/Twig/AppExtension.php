@@ -18,7 +18,6 @@ class AppExtension extends AbstractExtension
     {
         $text = preg_replace('/(\r\n|\n|\r){2,}/', '\n', $text);
 
-
         return explode('\n', $text);
     }
 }
