@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecipeIngredientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RecipeIngredientRepository::class)]
@@ -26,6 +28,17 @@ class RecipeIngredient
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $unit = null;
+
+    /**
+     * @var Collection<int, StepIngredient>
+     */
+    #[ORM\OneToMany(targetEntity: StepIngredient::class, mappedBy: 'recipeIngredient')]
+    private Collection $stepIngredients;
+
+    public function __construct()
+    {
+        $this->stepIngredients = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -81,6 +94,36 @@ class RecipeIngredient
     public function setUnit(?string $unit): static
     {
         $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StepIngredient>
+     */
+    public function getStepIngredients(): Collection
+    {
+        return $this->stepIngredients;
+    }
+
+    public function addStepIngredient(StepIngredient $stepIngredient): static
+    {
+        if (!$this->stepIngredients->contains($stepIngredient)) {
+            $this->stepIngredients->add($stepIngredient);
+            $stepIngredient->setRecipeIngredient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStepIngredient(StepIngredient $stepIngredient): static
+    {
+        if ($this->stepIngredients->removeElement($stepIngredient)) {
+            // set the owning side to null (unless already changed)
+            if ($stepIngredient->getRecipeIngredient() === $this) {
+                $stepIngredient->setRecipeIngredient(null);
+            }
+        }
 
         return $this;
     }
