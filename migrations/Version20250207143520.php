@@ -7,9 +7,6 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20250207143520 extends AbstractMigration
 {
     public function getDescription(): string
@@ -23,8 +20,5 @@ final class Version20250207143520 extends AbstractMigration
         $this->addSql('UPDATE category SET image = SUBSTRING_INDEX(image, "/", -1)');
     }
 
-    public function down(Schema $schema): void
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-    }
+    public function down(Schema $schema): void {}
 }
