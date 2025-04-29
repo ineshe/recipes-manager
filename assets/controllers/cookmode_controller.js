@@ -37,7 +37,7 @@ export default class extends Controller {
     }
 
     updateStepDescription() {
-        this.stepTarget.textContent = this.stepsValue[this.index];
+        this.stepTarget.textContent = this.stepsValue[this.index].instruction;
     }
 
     updatePageNumber() {
