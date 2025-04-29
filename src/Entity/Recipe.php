@@ -46,7 +46,7 @@ class Recipe
     /**
      * @var Collection<int, Step>
      */
-    #[ORM\OneToMany(targetEntity: Step::class, mappedBy: 'recipe', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Step::class, mappedBy: 'recipe', orphanRemoval: true, cascade: ['persist'])]
     private Collection $steps;
 
     public function __toString(): string

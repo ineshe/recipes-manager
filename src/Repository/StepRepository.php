@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Step;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Recipe;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Step>
@@ -14,6 +15,15 @@ class StepRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Step::class);
+    }
+
+    public function findMaxPositionByRecipe(Recipe $recipe): int {
+        return (int) $this->createQueryBuilder('s')
+            ->select('MAX(s.position)')
+            ->andWhere('s.recipe = :recipe')
+            ->setParameter('recipe', $recipe)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     //    /**

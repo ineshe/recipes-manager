@@ -32,6 +32,11 @@ class Step
     #[ORM\OneToMany(targetEntity: StepIngredient::class, mappedBy: 'step', orphanRemoval: true)]
     private Collection $stepIngredients;
 
+    public function __toString(): string
+    {
+        return "Schritt " . $this->getPosition();
+    }
+
     public function __construct()
     {
         $this->stepIngredients = new ArrayCollection();

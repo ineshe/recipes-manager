@@ -40,7 +40,7 @@ class RecipeCrudController extends AbstractCrudController
                 ->setTextAlign('left'),
             TextField::new('title', 'Titel')
                 /* ->setTemplatePath('admin/field/text.html.twig') */,
-            TextareaField::new('method')->hideOnIndex(),
+            CollectionField::new('steps', 'Schritte')->useEntryCrudForm()->hideOnIndex(),
             CollectionField::new('recipeIngredients', 'Zutaten')->useEntryCrudForm()->hideOnIndex(),
             AssociationField::new('categories', 'Kategorien')->setFormTypeOption('by_reference', false)->onlyOnForms(),
             ArrayField::new('categories', 'Kategorien')->hideOnForm(),
