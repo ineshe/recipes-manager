@@ -29,7 +29,7 @@ class Step
     /**
      * @var Collection<int, StepIngredient>
      */
-    #[ORM\OneToMany(targetEntity: StepIngredient::class, mappedBy: 'step', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: StepIngredient::class, mappedBy: 'step', orphanRemoval: true, cascade: ['persist'])]
     private Collection $stepIngredients;
 
     public function __toString(): string

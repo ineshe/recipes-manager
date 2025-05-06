@@ -27,6 +27,11 @@ class StepIngredient
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $unit = null;
 
+    public function __toString(): string
+    {
+        return $this->getRecipeIngredient();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

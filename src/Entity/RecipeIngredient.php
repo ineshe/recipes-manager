@@ -42,7 +42,8 @@ class RecipeIngredient
 
     public function __toString(): string
     {
-        return sprintf('%s %s %s', $this->getAmount(), $this->getUnit(), $this->ingredient->getName());
+        // return sprintf('%s %s %s', $this->getAmount(), $this->getUnit(), $this->ingredient->getName());
+        return $this->getIngredient();
     }
 
     public function getId(): ?int
