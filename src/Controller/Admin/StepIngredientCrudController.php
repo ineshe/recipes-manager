@@ -3,10 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\StepIngredient;
+use Doctrine\ORM\QueryBuilder;
 use App\Entity\RecipeIngredient;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -32,13 +33,20 @@ class StepIngredientCrudController extends AbstractCrudController
         $currentRecipe = $this->getContext()->getEntity()->getInstance();
 
         return [
-            AssociationField::new('recipeIngredient', 'Zutat')->setQueryBuilder(
-                function (QueryBuilder $qb) use ($currentRecipe) {
+            AssociationField::new('recipeIngredient', 'Zutat')
+                ->setQueryBuilder(function (QueryBuilder $qb) use ($currentRecipe) {
                     $qb
                         ->andWhere('entity.recipe = :recipe')
                         ->setParameter('recipe', $currentRecipe);
-                }
-            ),
+                })
+                ->setFormTypeOptions([
+                    'choice_attr' => function($ingredient) {
+                        return [
+                            'data-amount' => $ingredient->getAmount(),
+                            'data-unit'   => $ingredient->getUnit(),
+                        ];
+                    }
+                ]),
             NumberField::new('amount', 'Menge'),
             TextField::new('unit', 'Einheit'),
         ];

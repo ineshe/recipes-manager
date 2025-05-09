@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Recipe;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
@@ -46,5 +47,10 @@ class RecipeCrudController extends AbstractCrudController
             ArrayField::new('categories', 'Kategorien')->hideOnForm(),
             AssociationField::new('recipeTags', 'Tags')->setFormTypeOption('by_reference', false),
         ];
+    }
+
+    public function configureAssets(Assets $assets): Assets
+    {
+        return $assets->addJsFile('js/recipe_defaults.js');
     }
 }
