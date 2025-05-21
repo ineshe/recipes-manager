@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Recipe;
 use App\Factory\TagFactory;
 use App\Factory\StepFactory;
 use App\Factory\UserFactory;
@@ -12,44 +11,38 @@ use App\Factory\IngredientFactory;
 use Doctrine\Persistence\ObjectManager;
 use App\Factory\RecipeIngredientFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class AppFixtures extends Fixture
 {
     private array $tagCache = [];
-    private array $categoryMap = [];
+    private array $categoryCache = [];
     private array $ingredientCache = [];
 
     public function load(ObjectManager $manager): void
     {
-        $recipesJsonPath = __DIR__ . '/recipes.json';
-
-        if (!file_exists($recipesJsonPath)) {
-            throw new \RuntimeException('Die Datei recipes.json wurde nicht gefunden.');
-        }
-
-        $recipesData = json_decode(file_get_contents($recipesJsonPath), true);
-
-        if ($recipesData === null) {
-            throw new \RuntimeException('Fehler beim Parsen der JSON-Datei.');
-        }
-
-        $categories = CategoryFactory::createSequence([
-            ['title' => 'Hauptgerichte', 'image' => 'hauptgerichte-1792x1024.webp'], 
-            ['title' => 'Desserts', 'image' => 'desserts-1792x1024.webp' ], 
-            ['title' => 'Getränke', 'image' => 'getraenke-1792x1024.webp'],
-        ]);
-
-        foreach ($categories as $category) {
-            $this->categoryMap[$category->getTitle()] = $category;
-        }
+        $recipesData = $this->readJsonData('/recipes.json');
+        $slugger = new AsciiSlugger();
 
         foreach ($recipesData as $recipeData) {
-            $recipeTags = $this->loadTags($recipeData['recipeTags']);
-            $recipeCategories = $this->loadCategories($recipeData['categories']);
+            $categoryData = array_map(function($category) use ($slugger) {
+                return [
+                    'title' => $category,
+                    'image' => $slugger->slug($category)->lower()->toString() . '-1792x1024.webp'
+                ];
+            }, $recipeData['categories']);
+
+            $recipeCategories = $this->createEntitiesIfNotExist(CategoryFactory::class, $categoryData, 'title', $this->categoryCache);
+
+            $tagData = array_map(function($tag) {
+                return ['name' => $tag];
+            }, $recipeData['recipeTags']);
+
+            $recipeTags = $this->createEntitiesIfNotExist(TagFactory::class, $tagData, 'name', $this->tagCache);
 
             $recipe = RecipeFactory::createOne([
                 'title' => $recipeData['title'],
-                'method' => $recipeData['method'],
+                'method' => $recipeData['method'], //look
                 'categories' => $recipeCategories,
                 'image' => $recipeData['image'],
                 'recipeTags' => $recipeTags,
@@ -63,7 +56,20 @@ class AppFixtures extends Fixture
                 ]);
             }
 
-            $this->loadIngredients($recipeData['ingredients'], $recipe->_real());
+            $ingredientData = array_map(function($ingredient) {
+                return ['name' => $ingredient['name']];
+            }, $recipeData['ingredients']);
+
+            $this->createEntitiesIfNotExist(IngredientFactory::class, $ingredientData, 'name', $this->ingredientCache);
+
+            foreach ($recipeData['ingredients'] as $recipeIngredient) {
+                RecipeIngredientFactory::createOne([
+                    'recipe' => $recipe,
+                    'ingredient' => $this->ingredientCache[$recipeIngredient['name']],
+                    'amount' => $recipeIngredient['amount'],
+                    'unit' => $recipeIngredient['unit'],
+                ]);
+            }
         }
 
         UserFactory::createSequence([
@@ -79,39 +85,27 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
-    private function loadTags(array $tagNames): array {
-        $recipeTags = [];
-        foreach ($tagNames as $tagName) {
-            $recipeTags[] = $this->tagCache[$tagName] ?? ($this->tagCache[$tagName] = TagFactory::createOne([
-                'name' => $tagName
-            ]));
+    private function readJsonData(string $path): mixed {
+        $recipesJsonPath = __DIR__ . $path;
+
+        if (!file_exists($recipesJsonPath)) {
+            throw new \RuntimeException('Die Datei recipes.json wurde nicht gefunden.');
         }
-        return $recipeTags;
+
+        $recipesData = json_decode(file_get_contents($recipesJsonPath), true);
+
+        if ($recipesData === null) {
+            throw new \RuntimeException('Fehler beim Parsen der JSON-Datei.');
+        }
+
+        return $recipesData;
     }
 
-    private function loadCategories(array $categoryTitles): array {
-        $recipeCategories = [];
-        foreach ($categoryTitles as $categoryTitle) {
-            if(!isset($this->categoryMap[$categoryTitle])) {
-                throw new \RuntimeException("Kategorie '{$categoryTitle}' nicht gefunden.");
-            }
-            $recipeCategories[] = $this->categoryMap[$categoryTitle];
+    private function createEntitiesIfNotExist(string $factoryClass, array $data, string $keyProp, array &$cache) {
+        $entities = [];
+        foreach ($data as $entity) {
+            $entities[] = $cache[$entity[$keyProp]] ?? ($cache[$entity[$keyProp]] = $factoryClass::createOne($entity));
         }
-        return $recipeCategories;
-    }
-
-    private function loadIngredients(array $ingredients, Recipe $recipe): void {
-        foreach ($ingredients as $ingredient) {
-            $this->ingredientCache[$ingredient['name']] ??= (IngredientFactory::createOne([
-                'name' => $ingredient['name']
-            ]));
-
-            RecipeIngredientFactory::createOne([
-                'recipe' => $recipe,
-                'ingredient' => $this->ingredientCache[$ingredient['name']],
-                'amount' => $ingredient['amount'],
-                'unit' => $ingredient['unit'],
-            ]);
-        }
+        return $entities;
     }
 }
