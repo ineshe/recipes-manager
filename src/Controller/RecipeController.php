@@ -20,7 +20,8 @@ class RecipeController extends AbstractController
             throw new BadRequestHttpException('Portionen müssen mindestens 1 sein.');
         }
         
-        $recipe = $recipeRepository->find($id);
+        // $recipe = $recipeRepository->find($id);
+        $recipe = $recipeRepository->findById($id);
         if(!$recipe) {
             throw $this->createNotFoundException('Recipe not found');
         }
