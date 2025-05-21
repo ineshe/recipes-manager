@@ -6,12 +6,14 @@
 
 {% block body %}
     {% set stepsData = recipe.steps|map(step => {
-        'instruction': step.instruction
+        'instruction': step.instruction,
+        'stepIngredients': step.stepIngredients|map(si => {
+            'amount': si.amount,
+            'unit': si.unit,
+            'name': si.recipeIngredient.ingredient.name
+        })
     }) %}
     <section data-controller="cookmode" data-cookmode-steps-value="{{ stepsData|json_encode|e('html_attr') }}">
-        <div>
-            <button data-action="cookmode#toggle" type="button">Kochmodus starten</button>
-        </div>
         {% block cook_mode %}
             {{ include('partials/_cook-mode.html.twig') }}
         {% endblock %}

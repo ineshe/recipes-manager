@@ -11,8 +11,8 @@
     <div class="max-w-screen-xl mx-auto px-4 md:px-8 w-full bg-white flex-grow flex flex-col pt-24">
         <div class="flex-grow">
             <h2 class="h2 text-secondary-color">{{ recipe.title }}</h2>
-            <p class="my-12 font-bold">{{ recipe.recipeIngredients|join(', ') }}</p>
-            <p data-cookmode-target="step" class="my-12">{{ stepsData[0].instruction }}</p>
+            <p data-cookmode-target="ingredients" class="my-12 font-bold"></p>
+            <p data-cookmode-target="step" class="my-12"></p>
         </div>
         <hr class="border-secondary-color">
         <div class="flex justify-between items-center my-4 text-secondary-color">
