@@ -10,6 +10,7 @@ use App\Factory\CategoryFactory;
 use App\Factory\IngredientFactory;
 use Doctrine\Persistence\ObjectManager;
 use App\Factory\RecipeIngredientFactory;
+use App\Factory\StepIngredientFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
@@ -18,6 +19,7 @@ class AppFixtures extends Fixture
     private array $tagCache = [];
     private array $categoryCache = [];
     private array $ingredientCache = [];
+    private array $recipeIngredientCache = [];
 
     public function load(ObjectManager $manager): void
     {
@@ -42,19 +44,10 @@ class AppFixtures extends Fixture
 
             $recipe = RecipeFactory::createOne([
                 'title' => $recipeData['title'],
-                'method' => $recipeData['method'], //look
                 'categories' => $recipeCategories,
                 'image' => $recipeData['image'],
                 'recipeTags' => $recipeTags,
             ]);
-
-            foreach ($recipeData['steps'] as $step) {
-                StepFactory::createOne([
-                    'position' => $step['position'],
-                    'instruction' => $step['instruction'],
-                    'recipe' => $recipe,
-                ]);
-            }
 
             $ingredientData = array_map(function($ingredient) {
                 return ['name' => $ingredient['name']];
@@ -63,12 +56,29 @@ class AppFixtures extends Fixture
             $this->createEntitiesIfNotExist(IngredientFactory::class, $ingredientData, 'name', $this->ingredientCache);
 
             foreach ($recipeData['ingredients'] as $recipeIngredient) {
-                RecipeIngredientFactory::createOne([
+                $this->recipeIngredientCache[$recipeIngredient['name']] = RecipeIngredientFactory::createOne([
                     'recipe' => $recipe,
                     'ingredient' => $this->ingredientCache[$recipeIngredient['name']],
                     'amount' => $recipeIngredient['amount'],
                     'unit' => $recipeIngredient['unit'],
                 ]);
+            }
+
+            foreach ($recipeData['steps'] as $step) {
+                $stepObj = StepFactory::createOne([
+                    'position' => $step['position'],
+                    'instruction' => $step['instruction'],
+                    'recipe' => $recipe,
+                ]);
+
+                foreach ($step['stepIngredients'] as $stepIngredient) {
+                    StepIngredientFactory::createOne([
+                        'step' => $stepObj,
+                        'recipeIngredient' => $this->recipeIngredientCache[$stepIngredient['ingredient']],
+                        'amount' => $stepIngredient['amount'],
+                        'unit' => $stepIngredient['unit'],
+                    ]);
+                }
             }
         }
 
@@ -103,9 +113,11 @@ class AppFixtures extends Fixture
 
     private function createEntitiesIfNotExist(string $factoryClass, array $data, string $keyProp, array &$cache) {
         $entities = [];
+
         foreach ($data as $entity) {
             $entities[] = $cache[$entity[$keyProp]] ?? ($cache[$entity[$keyProp]] = $factoryClass::createOne($entity));
         }
+        
         return $entities;
     }
 }
