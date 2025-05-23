@@ -13,7 +13,7 @@
             'name': si.recipeIngredient.ingredient.name
         })
     }) %}
-    <section data-controller="cookmode" data-cookmode-steps-value="{{ stepsData|json_encode|e('html_attr') }}" data-cookmode-servings-value="{{ servings }}">
+    <section class="max-w-screen-xl xl:mx-auto mx-8 my-10" data-controller="cookmode" data-cookmode-steps-value="{{ stepsData|json_encode|e('html_attr') }}" data-cookmode-servings-value="{{ servings }}">
         {% block cook_mode %}
             {{ include('partials/_cook-mode.html.twig') }}
         {% endblock %}
