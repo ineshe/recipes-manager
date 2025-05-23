@@ -43,6 +43,12 @@ class Recipe
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'recipes')]
     private Collection $recipeTags;
 
+    /**
+     * @var Collection<int, Step>
+     */
+    #[ORM\OneToMany(targetEntity: Step::class, mappedBy: 'recipe', orphanRemoval: true, cascade: ['persist'])]
+    private Collection $steps;
+
     public function __toString(): string
     {
         return $this->getTitle();
@@ -53,6 +59,7 @@ class Recipe
         $this->recipeIngredients = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->recipeTags = new ArrayCollection();
+        $this->steps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -186,6 +193,36 @@ class Recipe
     public function removeRecipeTag(Tag $recipeTag): static
     {
         $this->recipeTags->removeElement($recipeTag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Step>
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(Step $step): static
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps->add($step);
+            $step->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): static
+    {
+        if ($this->steps->removeElement($step)) {
+            // set the owning side to null (unless already changed)
+            if ($step->getRecipe() === $this) {
+                $step->setRecipe(null);
+            }
+        }
 
         return $this;
     }

@@ -1,0 +1,24 @@
+<div data-cookmode-target="overlay" class="fixed inset-0 z-50 hidden {# overflow-auto #} bg-background-color flex flex-col h-full">
+    <div class="bg-primary-color py-6 px-8 text-white font-semibold text-lg flex justify-between items-center">
+        <p>Kochmodus</p>
+        <button type="button" data-action="cookmode#toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-10">
+                <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8 w-full bg-white flex-grow flex flex-col pt-24">
+        <div class="flex-grow">
+            <h2 class="h2 text-secondary-color">{{ recipe.title }}</h2>
+            <p data-cookmode-target="ingredients" class="my-12 font-bold"></p>
+            <p data-cookmode-target="step" class="my-12"></p>
+        </div>
+        <hr class="border-secondary-color">
+        <div class="flex justify-between items-center my-4 text-secondary-color">
+            <button type="button" class="p-4" data-action="cookmode#prevStep" data-cookmode-target="prevButton">{{ ux_icon('bxs:left-arrow', {class: 'w-4 h-4'}) }}</button>
+            <div class="font-bold" data-cookmode-target="pageNumber">Schritt 1 von {{ stepsData|length }}</div>
+            <button type="button" class="p-4" data-action="cookmode#nextStep" data-cookmode-target="nextButton">{{ ux_icon('bxs:right-arrow', {class: 'w-4 h-4'}) }}</button>
+        </div>
+    </div>
+</div>

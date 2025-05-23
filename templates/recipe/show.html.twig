@@ -5,9 +5,21 @@
 {% endblock %}
 
 {% block body %}
-    <section class="max-w-container">
+    {% set stepsData = recipe.steps|map(step => {
+        'instruction': step.instruction,
+        'stepIngredients': step.stepIngredients|map(si => {
+            'amount': si.amount,
+            'unit': si.unit,
+            'name': si.recipeIngredient.ingredient.name
+        })
+    }) %}
+    <section data-controller="cookmode" data-cookmode-steps-value="{{ stepsData|json_encode|e('html_attr') }}" data-cookmode-servings-value="{{ servings }}">
+        {% block cook_mode %}
+            {{ include('partials/_cook-mode.html.twig') }}
+        {% endblock %}
         <div class="p-8 bg-white">
             <h2 class="h2 text-secondary-color">{{ recipe.title }}</h2>
+            <button class="block py-2.5 px-3 text-white font-semibold bg-secondary-color rounded-sm mb-4" data-action="cookmode#toggle" type="button">Kochmodus starten</button>
             {% for tag in recipe.recipeTags %}
                 <span class="tag">{{ tag.name }}</span>
             {% endfor %}
@@ -45,9 +57,8 @@
                 <h3 class="h3 text-secondary-color">Zubereitung</h3>
                 <div>
                     <ol class="list-decimal pl-4 space-y-4">
-                        {% set paragraphs = recipe.method|nl_split %}
-                        {% for paragraph in paragraphs %}
-                            <li>{{ paragraph }}</li>
+                        {% for step in recipe.steps %}
+                            <li>{{ step.instruction }}</li>
                         {% endfor %}
                     </ol>
                 </div>
