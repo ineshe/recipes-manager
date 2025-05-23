@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
     static targets = ["overlay", "step", "ingredients", "pageNumber", "prevButton", "nextButton"];
-    static values = { steps: Array };
+    static values = { steps: Array, servings: Number };
 
     initialize() {
         this.index = 0;
@@ -44,7 +44,7 @@ export default class extends Controller {
     updateStepIngredients() {
         const ingredientsString = this.stepsValue[this.index].stepIngredients
             .map(ingredient => {
-                const amount = ingredient.amount ? ingredient.amount : '';
+                const amount = ingredient.amount ? ingredient.amount / 4 * this.servingsValue : '';
                 const unit = ingredient.unit ? ingredient.unit : '';
                 return `${amount} ${unit} ${ingredient.name}`;
             })
