@@ -20,9 +20,7 @@
         <div class="p-8 bg-white">
             <h2 class="h2 text-secondary-color">{{ recipe.title }}</h2>
             <button class="block py-2.5 px-3 text-white font-semibold bg-secondary-color rounded-sm mb-4" data-action="cookmode#toggle" type="button">Kochmodus starten</button>
-            {% for tag in recipe.recipeTags %}
-                <span class="tag">{{ tag.name }}</span>
-            {% endfor %}
+            <p class="tag">{{ recipe.recipeTags|map(tag => tag.name)|join(', ')}}</p>
         </div>
         <img class="object-cover object-center img-large-height w-full" src="{{ recipe.imageUrl | imagine_filter('homepage_stage') }}">
         <div class="flex flex-wrap">

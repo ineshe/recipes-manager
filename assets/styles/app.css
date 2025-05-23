@@ -26,7 +26,7 @@
 
 @layer utilities {
     .tag {
-        @apply bg-secondary-color text-white px-2 py-0.5 rounded-sm my-0.5 inline-block;
+        @apply text-secondary-color py-0.5 my-0.5;
     }
 
     .img-large-height {
