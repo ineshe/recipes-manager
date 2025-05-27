@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Recipe;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
@@ -40,11 +41,16 @@ class RecipeCrudController extends AbstractCrudController
                 ->setTextAlign('left'),
             TextField::new('title', 'Titel')
                 /* ->setTemplatePath('admin/field/text.html.twig') */,
-            TextareaField::new('method')->hideOnIndex(),
+            CollectionField::new('steps', 'Schritte')->useEntryCrudForm()->hideOnIndex(),
             CollectionField::new('recipeIngredients', 'Zutaten')->useEntryCrudForm()->hideOnIndex(),
             AssociationField::new('categories', 'Kategorien')->setFormTypeOption('by_reference', false)->onlyOnForms(),
             ArrayField::new('categories', 'Kategorien')->hideOnForm(),
             AssociationField::new('recipeTags', 'Tags')->setFormTypeOption('by_reference', false),
         ];
+    }
+
+    public function configureAssets(Assets $assets): Assets
+    {
+        return $assets->addJsFile('js/recipe_defaults.js');
     }
 }

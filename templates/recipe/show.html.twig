@@ -5,12 +5,22 @@
 {% endblock %}
 
 {% block body %}
-    <section>
+    {% set stepsData = recipe.steps|map(step => {
+        'instruction': step.instruction,
+        'stepIngredients': step.stepIngredients|map(si => {
+            'amount': si.amount,
+            'unit': si.unit,
+            'name': si.recipeIngredient.ingredient.name
+        })
+    }) %}
+    <section class="max-w-screen-xl xl:mx-auto mx-8 my-10" data-controller="cookmode" data-cookmode-steps-value="{{ stepsData|json_encode|e('html_attr') }}" data-cookmode-servings-value="{{ servings }}">
+        {% block cook_mode %}
+            {{ include('partials/_cook-mode.html.twig') }}
+        {% endblock %}
         <div class="p-8 bg-white">
             <h2 class="h2 text-secondary-color">{{ recipe.title }}</h2>
-            {% for tag in recipe.recipeTags %}
-                <span class="tag">{{ tag.name }}</span>
-            {% endfor %}
+            <button class="block py-2.5 px-3 text-white font-semibold bg-secondary-color rounded-sm mb-4" data-action="cookmode#toggle" type="button">Kochmodus starten</button>
+            <p class="tag">{{ recipe.recipeTags|map(tag => tag.name)|join(', ')}}</p>
         </div>
         <img class="object-cover object-center img-large-height w-full" src="{{ recipe.imageUrl | imagine_filter('homepage_stage') }}">
         <div class="flex flex-wrap">
@@ -45,9 +55,8 @@
                 <h3 class="h3 text-secondary-color">Zubereitung</h3>
                 <div>
                     <ol class="list-decimal pl-4 space-y-4">
-                        {% set paragraphs = recipe.method|nl_split %}
-                        {% for paragraph in paragraphs %}
-                            <li>{{ paragraph }}</li>
+                        {% for step in recipe.steps %}
+                            <li>{{ step.instruction }}</li>
                         {% endfor %}
                     </ol>
                 </div>

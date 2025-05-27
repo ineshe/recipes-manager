@@ -8,7 +8,7 @@
 
     {% set recipeDemo = random(category.recipes) %}
 
-    <section>
+    <section class="max-w-container">
         <img class="object-cover object-center h-[250px] w-full shadow" src="{{ category.imageUrl | imagine_filter('category_stage') }}">
         <h2 class="h2 text-secondary-color mt-8">
             {{ category.title }}
