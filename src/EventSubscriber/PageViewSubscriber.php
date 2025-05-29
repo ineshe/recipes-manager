@@ -39,6 +39,10 @@ class PageViewSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if(0 === strpos($route, 'liip_imagine_filter')) {
+            return;
+        }
+
         $data = is_file($this->file) 
             ? json_decode(file_get_contents($this->file), true) 
             : [];
