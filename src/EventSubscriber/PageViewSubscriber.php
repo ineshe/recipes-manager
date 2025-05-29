@@ -10,10 +10,10 @@ class PageViewSubscriber implements EventSubscriberInterface
     private string $file;
     private array $excludedIps;
 
-    public function __construct(array $pageview_excluded_ips)
+    public function __construct(?array $pageview_excluded_ips)
     {
         $this->file = __DIR__.'/../../var/pageviews.json';
-        $this->excludedIps = $pageview_excluded_ips;
+        $this->excludedIps = $pageview_excluded_ips ?? [];
     }
 
     public static function getSubscribedEvents(): array
