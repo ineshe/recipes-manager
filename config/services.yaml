@@ -24,6 +24,7 @@ services:
     # please note that last definitions always *replace* previous ones
     App\EventSubscriber\PageViewSubscriber:
         arguments:
-            $pageview_excluded_ips: '%pageview_excluded_ips%'
+            $pageviewsLogger: '@monolog.logger.pageviews'
+            $excludedRoutes: '%pageview_excluded_routes%'
         tags: 
             - { name: kernel.event_subscriber }

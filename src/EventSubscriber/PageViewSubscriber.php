@@ -2,19 +2,16 @@
 
 namespace App\EventSubscriber;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class PageViewSubscriber implements EventSubscriberInterface 
 {
-    private string $file;
-    private array $excludedIps;
-
-    public function __construct(?array $pageview_excluded_ips)
-    {
-        $this->file = __DIR__.'/../../var/pageviews.json';
-        $this->excludedIps = $pageview_excluded_ips ?? [];
-    }
+    public function __construct(
+        private LoggerInterface $pageviewsLogger,
+        private array $excludedRoutes = []
+    ) {}
 
     public static function getSubscribedEvents(): array
     {
@@ -29,8 +26,7 @@ class PageViewSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $ip = $event->getRequest()->getClientIp();
-        if (in_array($ip, $this->excludedIps, true)) {
+        if($event->getRequest()->cookies->get('skip_pv') === '1') {
             return;
         }
 
@@ -39,16 +35,14 @@ class PageViewSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if(0 === strpos($route, 'liip_imagine_filter')) {
-            return;
+        foreach ($this->excludedRoutes as $pattern) {
+            if (str_starts_with($route, $pattern)) {
+                return;
+            }
         }
 
-        $data = is_file($this->file) 
-            ? json_decode(file_get_contents($this->file), true) 
-            : [];
-
-        $data[$route] = ($data[$route] ?? 0) + 1;
-
-        file_put_contents($this->file, json_encode($data, JSON_PRETTY_PRINT));
+        $this->pageviewsLogger->info('Page viewed', [
+            'route' => $route,
+        ]);
     }
 }
