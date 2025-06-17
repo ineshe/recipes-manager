@@ -1,6 +1,17 @@
 monolog:
     channels:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+        - pageviews
+
+    handlers:
+        pageviews:
+            type: rotating_file
+            path: '%kernel.logs_dir%/pageviews.log'
+            level: info
+            max_files: 12
+            filename_format: '{filename}-{date}'
+            date_format: 'Y-m'
+            channels: ['pageviews']
 
 when@dev:
     monolog:
