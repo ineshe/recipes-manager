@@ -6,10 +6,12 @@ use App\Entity\Tag;
 use App\Entity\Recipe;
 use App\Entity\Category;
 use App\Entity\Ingredient;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route; 
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
@@ -38,6 +40,22 @@ class DashboardController extends AbstractDashboardController
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
         // return $this->render('some/path/my-dashboard.html.twig');
+    }
+
+    #[Route('/admin/skip-pageview', name: 'admin_skip_pv')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function skipPageview(): Response
+    {
+        $cookie = Cookie::create('skip_pv', '1')
+            ->withPath('/')
+            ->withExpires((new \DateTimeImmutable('+1 year'))->getTimestamp())
+            ->withSameSite('lax')
+        ;
+
+        $response = new Response('Cookie „skip_pv“ gesetzt — PageViews werden nicht gezählt.');
+        $response->headers->setCookie($cookie);
+
+        return $response;
     }
 
     public function configureDashboard(): Dashboard
